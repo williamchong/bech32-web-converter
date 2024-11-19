@@ -8,6 +8,9 @@
     <section>
       <h2>Input Address</h2>
       <input v-model="inputAddress" placeholder="cosmos1..../0xabcd....">
+      <br>
+      <button v-if="hasKeplr" @click="getKeplrCosmosAddress">Connect Keplr</button>
+      <button v-if="hasEvmWallet" @click="getEvmAddress">Connect Metamask/EVM Wallet</button>
       <p v-if="!inputAddress">Please input address</p>
       <p style="color: red" v-else-if="!isInputValid">Invalid Address Format</p>
     </section>
@@ -59,11 +62,24 @@
 import { bech32 } from 'bech32'
 import { Buffer } from 'node:buffer'
 
+declare global {
+  interface Window {
+    keplr?: any;
+    ethereum?: any;
+  }
+}
+
 const inputAddress = ref('')
 const newPrefix = ref('')
 
 const isInputEthereum = computed(() => {
   return /^(0x)?[0-9a-fA-F]{40}$/.test(inputAddress.value)
+})
+const hasKeplr = computed(() => {
+  return typeof window.keplr !== 'undefined'
+})
+const hasEvmWallet = computed(() => {
+  return typeof window.ethereum !== 'undefined'
 })
 
 const convertedWords = computed(() => {
@@ -93,4 +109,20 @@ const convertedEvmAddress = computed(() => {
   const data = bech32.fromWords(convertedWords.value)
   return `0x${Buffer.from(data).toString('hex')}`;
 })
+
+async function getKeplrCosmosAddress() {
+  const chainId = 'cosmoshub-4';
+  await window.keplr.enable(chainId);
+
+  const offlineSigner = window.keplr.getOfflineSigner(chainId);
+  const accounts = await offlineSigner.getAccounts();
+  inputAddress.value = accounts[0].address;
+}
+
+async function getEvmAddress() {
+  await window.ethereum.enable();
+  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  inputAddress.value = accounts[0];
+}
+
 </script>
