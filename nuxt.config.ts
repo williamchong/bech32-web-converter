@@ -9,6 +9,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'preload', href: 'https://cdn.jsdelivr.net/npm/keccak256@latest/keccak256.js', as: 'script' },
+        { rel: 'preload', href: 'https://www.googletagmanager.com/gtag/js?id=G-J481P5HG5T', as: 'script' },
       ],
       script: [
         { src: 'https://cdn.jsdelivr.net/npm/keccak256@latest/keccak256.js', body: true },
