@@ -49,19 +49,33 @@
     </section>
     <hr>
     <section>
-      <h2>Important Note about Cosmos(ATOM) vs EVM(ETH) Derivation Path</h2>
+      <h2>Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths for HD Wallets</h2>
       <div>
-        <p>Note that the derivation path(SLIP44) of cosmos/ATOM address(118) is usually different from Ethereum(ETH)
-          address(60)!
-          Some EVM compatible cosmos chain uses 60 as derivation path.</p>
-        <p>That means this tool CANNOT calculate conversion between cosmos and evm address assuming user generate
-          wallets using SEED PHRASE.
-          On the other hand, if PRIVATE KEY is used instead, the converted address would be correct for chain.</p>
+        <p>Note that the <a href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-paths"
+            rel="noopener noreferrer">derivation path</a> (<a
+            href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" rel="noopener noreferrer">SLIP44</a>)
+          of <a href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
+            rel="noopener noreferrer">Cosmos/ATOM (118) addresses</a> is usually different from Ethereum/ETH (60)!</p>
+        <p>This means this tool CANNOT calculate conversion between Cosmos and EVM addresses from a SEED PHRASE (<a
+            href="https://www.ledger.com/academy/crypto/what-are-hierarchical-deterministic-hd-wallets"
+            rel="noopener noreferrer">HD Wallet</a>).</p>
+        <p>Some EVM-compatible Cosmos-SDK based chains (e.g., <a
+            href="https://docs.evmos.org/protocol/concepts/accounts#evmos-accounts" rel="noopener noreferrer">
+            Evmos</a>, Dymension) use 60 as the derivation path. Please be careful when you are converting prefixes
+          based on
+          these chains.</p>
+        <p>On the other hand, if a PRIVATE KEY is used instead, the converted address would be correct for all chains.
+        </p>
+        <p>For an example list of derivation paths for different chains, please refer to <a
+            href="https://github.com/cosmostation/cosmostation-ios?tab=readme-ov-file#supporting-chains-cosmos"
+            rel="noopener noreferrer">this document by Cosmostation</a>.</p>
       </div>
     </section>
+    <hr>
     <section>
-      <h2>What is EVM checksum address(EIP-55)?</h2>
-      <p>Checksum address(EIP-55) is a system for Ethereum addresses that adds a mix of uppercase and lowercase letters
+      <h2>What is an EVM Checksum Address (EIP-55)?</h2>
+      <p>A checksum address (<a href="https://eips.ethereum.org/EIPS/eip-55" rel="noopener noreferrer">EIP-55</a>) is a
+        system for Ethereum addresses that adds a mix of uppercase and lowercase letters
         to help catch typing mistakes. By using a special method to decide which letters should be capitalized, it makes
         errors more obvious and helps ensure transactions go to the correct address.</p>
     </section>
