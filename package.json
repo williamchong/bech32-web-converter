@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "bech32": "^2.0.0",
     "nuxt": "^3.12.3",
     "vue": "latest"
   }
