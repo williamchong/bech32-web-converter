@@ -15,6 +15,10 @@ export default defineNuxtConfig({
       ],
     },
   },
+  modules: ['nuxt-gtag'],
+  gtag: {
+    id: "G-J481P5HG5T",
+  },
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   experimental: {

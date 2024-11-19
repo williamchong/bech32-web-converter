@@ -11,6 +11,7 @@
   "dependencies": {
     "bech32": "^2.0.0",
     "nuxt": "^3.12.3",
+    "nuxt-gtag": "^3.0.1",
     "vue": "latest"
   }
 }
