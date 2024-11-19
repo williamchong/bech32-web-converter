@@ -2,7 +2,7 @@
   <div>
     <section>
       <h1>Bech32 Wallet Address Prefix Web Converter</h1>
-      <p>Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.</p>
+      <p>Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using bech32 address prefixes.</p>
     </section>
     <hr>
     <section>
@@ -68,6 +68,7 @@ declare global {
   interface Window {
     keplr?: any;
     ethereum?: any;
+    keccak256?: any;
   }
 }
 
@@ -110,7 +111,18 @@ const convertedCosmosAddress = computed(() => {
 const convertedEvmAddress = computed(() => {
   if (convertedWords.value.length === 0) return '-'
   const data = bech32.fromWords(convertedWords.value)
-  return `0x${Buffer.from(data).toString('hex')}`;
+  const address = Buffer.from(data).toString('hex');
+  const hash = window.keccak256(address).toString('hex');
+  // Apply checksum
+  let checksumAddress = '0x';
+  for (let i = 0; i < address.length; i++) {
+    if (parseInt(hash[i], 16) >= 8) {
+      checksumAddress += address[i].toUpperCase();
+    } else {
+      checksumAddress += address[i];
+    }
+  }
+  return checksumAddress;
 })
 
 async function getKeplrCosmosAddress() {
