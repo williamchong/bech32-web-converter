@@ -2,7 +2,8 @@
   <div>
     <section>
       <h1>Bech32 Wallet Address Prefix Web Converter</h1>
-      <p>Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using bech32 address prefixes.</p>
+      <p>Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using
+        bech32 address prefixes.</p>
     </section>
     <hr>
     <section>
@@ -57,6 +58,12 @@
           wallets using SEED PHRASE.
           On the other hand, if PRIVATE KEY is used instead, the converted address would be correct for chain.</p>
       </div>
+    </section>
+    <section>
+      <h2>What is EVM checksum address(EIP-55)?</h2>
+      <p>Checksum address(EIP-55) is a system for Ethereum addresses that adds a mix of uppercase and lowercase letters
+        to help catch typing mistakes. By using a special method to decide which letters should be capitalized, it makes
+        errors more obvious and helps ensure transactions go to the correct address.</p>
     </section>
   </div>
 </template>
