@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Bech32 Wallet Address Prefix Web Converter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.
 
 ## Setup
 
