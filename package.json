@@ -1,6 +1,5 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "bech32-web-converter",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
