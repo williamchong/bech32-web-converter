@@ -8,25 +8,42 @@
     <section>
       <h2>Input Address</h2>
       <input v-model="inputAddress" placeholder="cosmos1..../0xabcd....">
+      <p v-if="!inputAddress">Please input address</p>
+      <p style="color: red" v-else-if="!isInputValid">Invalid Address Format</p>
     </section>
     <section>
       <h2>Converted Addresses</h2>
-      <label>New Prefix: </label>
-      <input v-model="newPrefix" placeholder="osmos">
-      <br>
-      <code>{{ convertedPrefixAddress }}</code>
-      <br>
-      <label>Cosmos address</label>
-      <br>
-      <code>{{ convertedCosmosAddress }}</code>
-      <br>
-      <label>Ethereum / EVM hex address</label>
-      <br>
-      <code>{{ convertedEvmAddress }}</code>
+      <table>
+        <tr>
+          <td>
+            <label>Cosmos:</label>
+          </td>
+          <td>
+            <code>{{ convertedCosmosAddress }}</code>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>EVM/Ethereum:</label>
+          </td>
+          <td>
+            <p><code>{{ convertedEvmAddress }}</code></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Custom Prefix: </label>
+            <input v-model="newPrefix" placeholder="osmos">
+          </td>
+          <td>
+            <code>{{ convertedPrefixAddress }}</code>
+          </td>
+        </tr>
+      </table>
     </section>
     <hr>
     <section>
-      <h2>Important Note about Derivation Path</h2>
+      <h2>Important Note about Cosmos(ATOM) vs EVM(ETH) Derivation Path</h2>
       <div>
         <p>Note that the derivation path(SLIP44) of cosmos/ATOM address(118) is usually different from Ethereum(ETH)
           address(60)!
@@ -57,18 +74,22 @@ const convertedWords = computed(() => {
   }
 })
 
+const isInputValid = computed(() => {
+  return convertedWords.value.length > 0
+})
+
 const convertedPrefixAddress = computed(() => {
-  if (convertedWords.value.length === 0) return newPrefix.value + '1....'
+  if (!newPrefix.value || convertedWords.value.length === 0) return '-';
   return bech32.encode(newPrefix.value, convertedWords.value)
 })
 
 const convertedCosmosAddress = computed(() => {
-  if (convertedWords.value.length === 0) return 'cosmos1....'
+  if (convertedWords.value.length === 0) return '-'
   return bech32.encode('cosmos', convertedWords.value)
 })
 
 const convertedEvmAddress = computed(() => {
-  if (convertedWords.value.length === 0) return '0x....'
+  if (convertedWords.value.length === 0) return '-'
   const data = bech32.fromWords(convertedWords.value)
   return `0x${Buffer.from(data).toString('hex')}`;
 })
