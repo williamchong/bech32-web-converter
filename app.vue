@@ -17,31 +17,33 @@
     <section>
       <h2>Converted Addresses</h2>
       <table>
-        <tr>
-          <td>
-            <label>Cosmos:</label>
-          </td>
-          <td>
-            <code>{{ convertedCosmosAddress }}</code>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label>EVM/Ethereum:</label>
-          </td>
-          <td>
-            <p><code>{{ convertedEvmAddress }}</code></p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label>Custom Prefix: </label>
-            <input v-model="newPrefix" placeholder="osmos">
-          </td>
-          <td>
-            <code>{{ convertedPrefixAddress }}</code>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>
+              <label>Cosmos:</label>
+            </td>
+            <td>
+              <code>{{ convertedCosmosAddress }}</code>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>EVM/Ethereum:</label>
+            </td>
+            <td>
+              <p><code>{{ convertedEvmAddress }}</code></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Custom Prefix: </label>
+              <input v-model="newPrefix" placeholder="osmos">
+            </td>
+            <td>
+              <code>{{ convertedPrefixAddress }}</code>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </section>
     <hr>
@@ -71,15 +73,16 @@ declare global {
 
 const inputAddress = ref('')
 const newPrefix = ref('')
+const hasKeplr = ref(false)
+const hasEvmWallet = ref(false)
 
 const isInputEthereum = computed(() => {
   return /^(0x)?[0-9a-fA-F]{40}$/.test(inputAddress.value)
 })
-const hasKeplr = computed(() => {
-  return typeof window.keplr !== 'undefined'
-})
-const hasEvmWallet = computed(() => {
-  return typeof window.ethereum !== 'undefined'
+
+onMounted(() => {
+  hasKeplr.value = typeof window.keplr !== 'undefined'
+  hasEvmWallet.value = typeof window.ethereum !== 'undefined'
 })
 
 const convertedWords = computed(() => {
