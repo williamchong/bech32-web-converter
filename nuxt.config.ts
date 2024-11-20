@@ -16,7 +16,10 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['nuxt-gtag'],
+  modules: [
+    'nuxt-gtag',
+    '@vueuse/nuxt',
+  ],
   gtag: {
     id: "G-J481P5HG5T",
   },

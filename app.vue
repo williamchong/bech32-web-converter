@@ -24,7 +24,7 @@
               <label>Cosmos:</label>
             </td>
             <td>
-              <code>{{ convertedCosmosAddress }}</code>
+              <CopyableField :value="convertedCosmosAddress" />
             </td>
           </tr>
           <tr>
@@ -32,7 +32,7 @@
               <label>EVM/Ethereum:</label>
             </td>
             <td>
-              <p><code>{{ convertedEvmAddress }}</code></p>
+              <CopyableField :value="convertedEvmAddress" />
             </td>
           </tr>
           <tr>
@@ -41,7 +41,7 @@
               <input v-model="newPrefix" placeholder="osmos">
             </td>
             <td>
-              <code>{{ convertedPrefixAddress }}</code>
+              <CopyableField :value="convertedPrefixAddress" />
             </td>
           </tr>
         </tbody>
@@ -120,17 +120,17 @@ const isInputValid = computed(() => {
 })
 
 const convertedPrefixAddress = computed(() => {
-  if (!newPrefix.value || convertedWords.value.length === 0) return '-';
+  if (!newPrefix.value || convertedWords.value.length === 0) return '';
   return bech32.encode(newPrefix.value, convertedWords.value)
 })
 
 const convertedCosmosAddress = computed(() => {
-  if (convertedWords.value.length === 0) return '-'
+  if (convertedWords.value.length === 0) return ''
   return bech32.encode('cosmos', convertedWords.value)
 })
 
 const convertedEvmAddress = computed(() => {
-  if (convertedWords.value.length === 0) return '-'
+  if (convertedWords.value.length === 0) return ''
   const data = bech32.fromWords(convertedWords.value)
   const address = Buffer.from(data).toString('hex');
   const hash = window.keccak256(address).toString('hex');
