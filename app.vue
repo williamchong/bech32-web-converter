@@ -79,6 +79,15 @@
         to help catch typing mistakes. By using a special method to decide which letters should be capitalized, it makes
         errors more obvious and helps ensure transactions go to the correct address.</p>
     </section>
+    <section>
+      <h2>Source, Issues and Development</h2>
+      <p>Explore the <a href="https://github.com/williamchong/bech32-web-converter">GitHub repository</a> to view the source
+        code, contribute to pull requests and issues.</p>
+    </section>
+    <section>
+      <h2>About me</h2>
+      <p>Visit <a href="https://blog.williamchong.cloud">my blog</a> for more developer tips and stories.</p>
+    </section>
   </div>
 </template>
 <script setup lang="ts">
