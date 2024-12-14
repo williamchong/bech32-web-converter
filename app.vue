@@ -83,13 +83,13 @@
 </template>
 <script setup lang="ts">
 import { bech32 } from 'bech32'
-import { Buffer } from 'node:buffer'
+import keccak256 from 'keccak256'
+import { Buffer } from 'buffer'
 
 declare global {
   interface Window {
     keplr?: any;
     ethereum?: any;
-    keccak256?: any;
   }
 }
 
@@ -133,7 +133,7 @@ const convertedEvmAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
   const data = bech32.fromWords(convertedWords.value)
   const address = Buffer.from(data).toString('hex');
-  const hash = window.keccak256(address).toString('hex');
+  const hash = keccak256(address).toString('hex');
   // Apply checksum
   let checksumAddress = '0x';
   for (let i = 0; i < address.length; i++) {
