@@ -36,6 +36,10 @@ export default defineNuxtConfig({
       __dirname,
       "node_modules/unenv/runtime/node/process"
     ),
+    "string_decoder/": path.resolve(
+      __dirname,
+      "node_modules/unenv/runtime/node/string_decoder"
+    ),
     events: path.resolve(__dirname, "node_modules/events"),
   },
   compatibilityDate: "2024-04-03",
