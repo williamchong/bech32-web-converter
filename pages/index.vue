@@ -22,15 +22,15 @@
           <div class="mt-4 flex gap-4">
             <button
               v-if="hasKeplr"
-              @click="getKeplrCosmosAddress"
               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              @click="getKeplrCosmosAddress"
             >
               Connect Keplr
             </button>
             <button
               v-if="hasEvmWallet"
-              @click="getEvmAddress"
               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              @click="getEvmAddress"
             >
               Connect Metamask/EVM Wallet
             </button>
@@ -77,10 +77,12 @@
         <section>
           <h2 class="text-xl font-semibold text-gray-900 mb-4">Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths</h2>
           <div class="prose prose-sm max-w-none text-gray-600">
-            <p>Note that the <a href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-paths"
+            <p>Note that the <a
+href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-paths"
                 rel="noopener noreferrer">derivation path</a> (<a
                 href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" rel="noopener noreferrer">SLIP44</a>)
-              of <a href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
+              of <a
+href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
                 rel="noopener noreferrer">Cosmos/ATOM (118) addresses</a> is usually different from Ethereum/ETH (60)!</p>
             <p>This means this tool CANNOT calculate conversion between Cosmos and EVM addresses from a SEED PHRASE (<a
                 href="https://www.ledger.com/academy/crypto/what-are-hierarchical-deterministic-hd-wallets"
