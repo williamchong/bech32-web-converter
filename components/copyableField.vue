@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <code>
+  <div class="flex items-center gap-2 w-full">
+    <code class="flex-1 p-2 bg-gray-50 rounded-md text-sm text-gray-600 break-all">
       {{ value || '-' }}
     </code>
-    <button v-if="value && isSupported" @click="onClickCopy">
+    <button
+      v-if="value && isSupported"
+      class="px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+      @click="onClickCopy"
+    >
       <span v-if="!copied">Copy</span>
-      <span v-else>Copied!</span>
+      <span v-else class="text-green-600">Copied</span>
     </button>
   </div>
 </template>
