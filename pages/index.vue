@@ -131,12 +131,14 @@ import { bech32 } from 'bech32'
 import keccak256 from 'keccak256'
 import { Buffer } from 'buffer'
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
   interface Window {
     keplr?: any;
     ethereum?: any;
   }
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 const inputAddress = ref('')
 const newPrefix = ref('')
@@ -155,7 +157,7 @@ onMounted(() => {
 const convertedWords = computed(() => {
   try {
     return isInputEthereum.value ? bech32.toWords(Buffer.from(inputAddress.value.replace('0x', ''), 'hex')) : bech32.decode(inputAddress.value).words
-  } catch (e) {
+  } catch {
     return []
   }
 })

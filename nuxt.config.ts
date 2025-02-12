@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/tailwindcss"],
+  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/tailwindcss", "@nuxt/eslint"],
   gtag: {
     id: "G-J481P5HG5T",
   },
