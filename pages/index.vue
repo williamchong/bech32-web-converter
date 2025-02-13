@@ -44,13 +44,23 @@
           <h2 class="text-xl font-semibold text-gray-900 mb-4">Converted Addresses</h2>
           <div class="space-y-4">
             <div class="grid grid-cols-3 gap-4 items-center">
-              <label class="text-sm font-medium text-gray-700">Cosmos:</label>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium text-gray-700">Cosmos:</label>
+                <button v-if="shouldShowWarningForCosmos" class="text-amber-500" @click="scrollToWarning">
+                  <WarningIcon class="w-5 h-5" />
+                </button>
+              </div>
               <div class="col-span-2">
                 <CopyableField :value="convertedCosmosAddress" />
               </div>
             </div>
             <div class="grid grid-cols-3 gap-4 items-center">
-              <label class="text-sm font-medium text-gray-700">EVM/Ethereum:</label>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium text-gray-700">EVM/Ethereum:</label>
+                <button v-if="shouldShowWarningForEvm" class="text-amber-500" @click="scrollToWarning">
+                  <WarningIcon class="w-5 h-5" />
+                </button>
+              </div>
               <div class="col-span-2">
                 <CopyableField :value="convertedEvmAddress" />
               </div>
@@ -74,8 +84,11 @@
 
       <!-- Info Sections -->
       <div class="bg-white shadow rounded-lg p-6 space-y-6">
-        <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths</h2>
+        <section ref="warningSection">
+          <div class="flex items-center gap-2 mb-4">
+            <WarningIcon v-if="shouldShowAnyWarning" class="w-6 h-6 text-amber-500" />
+            <h2 class="text-xl font-semibold text-gray-900">Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths</h2>
+          </div>
           <div class="prose prose-sm max-w-none text-gray-600">
             <p>Note that the <a
 href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-paths"
@@ -83,7 +96,7 @@ href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-
                 href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" rel="noopener noreferrer">SLIP44</a>)
               of <a
 href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
-                rel="noopener noreferrer">Cosmos/ATOM (118) addresses</a> is usually different from Ethereum/ETH (60)!</p>
+                rel="noopener noreferrer">Cosmos/ATOM (118) addresses</a> is usually different from Ethereum/ETH <strong>(60)</strong>!</p>
             <p>This means this tool CANNOT calculate conversion between Cosmos and EVM addresses from a SEED PHRASE (<a
                 href="https://www.ledger.com/academy/crypto/what-are-hierarchical-deterministic-hd-wallets"
                 rel="noopener noreferrer">HD Wallet</a>).</p>
@@ -129,6 +142,7 @@ href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
   </div>
 </template>
 <script setup lang="ts">
+import WarningIcon from '~/components/WarningIcon.vue'
 import { bech32 } from 'bech32'
 import keccak256 from 'keccak256'
 import { Buffer } from 'buffer'
@@ -208,6 +222,24 @@ async function getEvmAddress() {
   await window.ethereum.enable();
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   inputAddress.value = accounts[0];
+}
+
+const warningSection = ref<HTMLElement | null>(null)
+
+const shouldShowWarningForEvm = computed(() => {
+  return isInputValid.value && !isInputEthereum.value
+})
+
+const shouldShowWarningForCosmos = computed(() => {
+  return isInputValid.value && isInputEthereum.value
+})
+
+const shouldShowAnyWarning = computed(() => {
+  return shouldShowWarningForEvm.value || shouldShowWarningForCosmos.value
+})
+
+function scrollToWarning() {
+  warningSection.value?.scrollIntoView({ behavior: 'smooth' })
 }
 
 </script>
