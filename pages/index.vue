@@ -144,7 +144,7 @@ href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
 <script setup lang="ts">
 import WarningIcon from '~/components/WarningIcon.vue'
 import { bech32 } from 'bech32'
-import keccak256 from 'keccak256'
+import { convertCosmosToEvm, convertEvmToCosmos } from '~/utils/address'
 import { Buffer } from 'buffer'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -189,24 +189,16 @@ const convertedPrefixAddress = computed(() => {
 
 const convertedCosmosAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
-  return bech32.encode('cosmos', convertedWords.value)
+  return isInputEthereum.value
+    ? convertEvmToCosmos(inputAddress.value)
+    : inputAddress.value
 })
 
 const convertedEvmAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
-  const data = bech32.fromWords(convertedWords.value)
-  const address = Buffer.from(data).toString('hex');
-  const hash = keccak256(address).toString('hex');
-  // Apply checksum
-  let checksumAddress = '0x';
-  for (let i = 0; i < address.length; i++) {
-    if (parseInt(hash[i], 16) >= 8) {
-      checksumAddress += address[i].toUpperCase();
-    } else {
-      checksumAddress += address[i];
-    }
-  }
-  return checksumAddress;
+  return isInputEthereum.value
+    ? inputAddress.value
+    : convertCosmosToEvm(inputAddress.value)
 })
 
 async function getKeplrCosmosAddress() {
