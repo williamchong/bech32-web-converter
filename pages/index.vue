@@ -18,6 +18,7 @@
             v-model="inputAddress"
             placeholder="cosmos1..../0xabcd...."
             class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            @click.once="onInputAddress"
           >
           <div class="mt-4 flex gap-4">
             <button
@@ -72,6 +73,7 @@
                   v-model="newPrefix"
                   placeholder="osmos"
                   class="w-24 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                  @input.once="onInputPrefix"
                 >
               </div>
               <div class="col-span-2">
@@ -202,18 +204,30 @@ const convertedEvmAddress = computed(() => {
 })
 
 async function getKeplrCosmosAddress() {
+  useTrackEvent('connect_keplr')
   const chainId = 'cosmoshub-4';
   await window.keplr.enable(chainId);
 
   const offlineSigner = window.keplr.getOfflineSigner(chainId);
   const accounts = await offlineSigner.getAccounts();
+  useTrackEvent('connect_keplr_success')
   inputAddress.value = accounts[0].address;
 }
 
 async function getEvmAddress() {
+  useTrackEvent('connect_ethereum')
   await window.ethereum.enable();
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  useTrackEvent('connect_ethereum_success')
   inputAddress.value = accounts[0];
+}
+
+function onInputAddress() {
+  useTrackEvent('input_address')
+}
+
+function onInputPrefix() {
+  useTrackEvent('input_prefix')
 }
 
 const warningSection = ref<HTMLElement | null>(null)
@@ -232,6 +246,7 @@ const shouldShowAnyWarning = computed(() => {
 
 function scrollToWarning() {
   warningSection.value?.scrollIntoView({ behavior: 'smooth' })
+  useTrackEvent('click_warning')
 }
 
 </script>
