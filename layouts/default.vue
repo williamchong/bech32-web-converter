@@ -4,6 +4,8 @@
   </div>
 </template>
 <script setup lang='ts'>
+const { t } = useI18n()
+
 useHead({
   script: [
     {
@@ -11,8 +13,8 @@ useHead({
       children: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
-        name: 'Bech32 Wallet Address Prefix Web Converter',
-        description: 'Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.',
+        name: t('title'),
+        description: t('description'),
         url: 'https://bech32.williamchong.cloud',
         image: 'https://bech32.williamchong.cloud/images/cover.png',
         applicationCategory: 'DeveloperApplication',
@@ -32,10 +34,10 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'Bech32 Wallet Address Prefix Web Converter',
-  ogTitle: 'Bech32 Wallet Address Prefix Web Converter',
-  description: 'Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.',
-  ogDescription: 'Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.',
+  title: t('title'),
+  ogTitle: t('title'),
+  description: t('description'),
+  ogDescription: t('description'),
   ogImage: 'https://bech32.williamchong.cloud/images/cover.png',
   ogType: 'website',
   ogUrl: 'https://bech32.williamchong.cloud',

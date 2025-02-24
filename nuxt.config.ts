@@ -25,11 +25,33 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/tailwindcss", "@nuxt/eslint"],
+  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/i18n", "@nuxtjs/tailwindcss", "@nuxt/eslint"],
   gtag: {
     id: "G-J481P5HG5T",
   },
   plugins: ["~/plugins/node.client.ts"],
+  i18n: {
+    baseUrl: 'https://bech32.williamchong.cloud',
+    strategy: 'prefix_and_default',
+    detectBrowserLanguage: {
+      useCookie: false,
+      redirectOn: 'root'
+    },
+    locales: [
+      {
+        code: 'en',
+        language: 'en-US',
+        file: 'en.json'
+      },
+      // {
+      //   code: 'zh',
+      //   language: 'zh-TW',
+      //   file: 'zh.json'
+      // }
+    ],
+    lazy: true,
+    defaultLocale: 'en',
+  },
   alias: {
     "readable-stream": path.resolve(__dirname, "node_modules/readable-stream"),
     "process/": path.resolve(

@@ -1,0 +1,57 @@
+{
+  "title": "Bech32 Wallet Address Prefix Web Converter",
+  "description": "Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using bech32 address prefixes.",
+  "input": {
+    "title": "Input Address",
+    "empty": "Please input address",
+    "invalid": "Invalid Address Format",
+    "buttons": {
+      "keplr": "Connect Keplr",
+      "evm": "Connect Metamask/EVM Wallet"
+    }
+  },
+  "converted": {
+    "title": "Converted Addresses",
+    "cosmos": "Cosmos:",
+    "evm": "EVM/Ethereum:",
+    "custom": "Custom Prefix:"
+  },
+  "warning": {
+    "title": "Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths",
+    "text": {
+      "derivation": "Note that the {0} ({1}) of {2} is usually different from Ethereum/ETH (60)!",
+      "chains": "Some EVM-compatible Cosmos-SDK based chains (e.g., {0}, Dymension) use 60 as the derivation path. Please be careful when you are converting prefixes based on these chains.",
+      "cosmostation": "For an example list of derivation paths for different chains, please refer to {0}.",
+      "2": "This means this tool CANNOT calculate conversion between Cosmos and EVM addresses from a SEED PHRASE (HD Wallet).",
+      "4": "On the other hand, if a PRIVATE KEY is used instead, the converted address would be correct for all chains.",
+      "derivation_link": "derivation path",
+      "slip44_link": "SLIP44",
+      "cosmos_link": "Cosmos/ATOM (118) addresses",
+      "evmos_link": "Evmos",
+      "cosmostation_link": "this document by Cosmostation"
+    }
+  },
+  "eip55": {
+    "title": "What is an EVM Checksum Address (EIP-55)?",
+    "text": "A checksum address ({0}) is a system for Ethereum addresses that adds a mix of uppercase and lowercase letters to help catch typing mistakes. By using a special method to decide which letters should be capitalized, it makes errors more obvious and helps ensure transactions go to the correct address.",
+    "eip55_link": "EIP-55"
+  },
+  "source": {
+    "title": "Source, Issues and Development",
+    "text": "Explore the {0} to view the source code, contribute to pull requests and issues."
+  },
+  "about": {
+    "title": "About me",
+    "text": "Visit {0} for more developer tips and stories."
+  },
+  "copy": {
+    "button": "Copy",
+    "copied": "Copied"
+  },
+  "links": {
+    "explore": "Explore the",
+    "github": "GitHub repository",
+    "visit": "Visit",
+    "blog": "my blog"
+  }
+}
