@@ -1,4 +1,4 @@
-# Bech32 Wallet Address Prefix Web Converter
+# Bech32 Wallet Address Prefix Converter
 
 Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.
 

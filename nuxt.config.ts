@@ -4,11 +4,11 @@ import path from "path";
 export default defineNuxtConfig({
   app: {
     head: {
-      title: "Bech32 Wallet Address Prefix Web Converter",
+      title: "Bech32 Wallet Address Prefix Converter",
       meta: [
         {
           name: "og:title",
-          content: "Bech32 Wallet Address Prefix Web Converter",
+          content: "Bech32 Wallet Address Prefix Converter",
         },
         {
           name: "description",
@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/i18n", "@nuxtjs/tailwindcss", "@nuxt/eslint"],
+  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/i18n", "@nuxtjs/tailwindcss", "@nuxt/eslint", "@nuxtjs/sitemap"],
   gtag: {
     id: "G-J481P5HG5T",
   },
@@ -51,6 +51,10 @@ export default defineNuxtConfig({
     ],
     lazy: true,
     defaultLocale: 'en',
+  },
+  site: {
+    url: 'https://bech32.williamchong.cloud',
+    name: 'Bech32 Wallet Address Prefix Converter',
   },
   alias: {
     "readable-stream": path.resolve(__dirname, "node_modules/readable-stream"),

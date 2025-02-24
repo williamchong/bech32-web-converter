@@ -1,5 +1,5 @@
 {
-  "title": "Bech32 Wallet Address Prefix Web Converter",
+  "title": "Bech32 Wallet Address Prefix Converter",
   "description": "Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using bech32 address prefixes.",
   "input": {
     "title": "Input Address",
