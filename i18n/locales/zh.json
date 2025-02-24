@@ -1,0 +1,57 @@
+{
+  "title": "Bech32 錢包地址前綴轉換器",
+  "description": "在 Cosmos(cosmos1)、以太坊(0x) 校驗和地址，以及不同基於 Cosmos 或 EVM 的鏈上使用 bech32 地址前綴之間進行轉換。",
+  "input": {
+    "title": "輸入地址",
+    "empty": "請輸入地址",
+    "invalid": "地址格式無效",
+    "buttons": {
+      "keplr": "連接 Keplr",
+      "evm": "連接 Metamask/EVM 錢包"
+    }
+  },
+  "converted": {
+    "title": "轉換後的地址",
+    "cosmos": "Cosmos:",
+    "evm": "EVM/以太坊:",
+    "custom": "自定義前綴:"
+  },
+  "warning": {
+    "title": "重要提示：關於 Cosmos (ATOM) 與 EVM (ETH) 衍生路徑的不同",
+    "text": {
+      "derivation": "請注意，{2} 的{0} ({1})通常與 Ethereum/ETH (60) 不同！",
+      "chains": "某些與 EVM 相容的基於 Cosmos-SDK 的鏈（例如 {0}、Dymension）會使用 60 作為衍生路徑。在基於不同的鏈進行前綴轉換時請務必小心。",
+      "cosmostation": "有關不同鏈的衍生路徑範例列表，請參考 {0}。",
+      "2": "這意味著本工具無法計算由同一助記詞（HD 錢包）衍生的正確 Cosmos 和 EVM 地址。",
+      "4": "另一方面，如果地址使用私鑰產生，則轉換後的地址在所有鏈都會是正確的。",
+      "derivation_link": "衍生路徑",
+      "slip44_link": "SLIP44",
+      "cosmos_link": "Cosmos/ATOM (118) 地址",
+      "evmos_link": "Evmos",
+      "cosmostation_link": "Cosmostation 的說明文件"
+    }
+  },
+  "eip55": {
+    "title": "什麼是 EVM 校驗大小寫地址 (EIP-55)？",
+    "text": "校驗大小寫地址 ({0}) 是一個為以太坊地址設計的系統，通過混合使用大小寫字母來幫助檢測輸入錯誤。通過使用特殊方法決定大小寫字母，令輸入錯誤更容易被發現，從而確保交易地址正確。",
+    "eip55_link": "EIP-55"
+  },
+  "source": {
+    "title": "公開原始碼",
+    "text": "瀏覽 {0} 查看原始碼、參與提交請求和問題討論。"
+  },
+  "about": {
+    "title": "關於我",
+    "text": "瀏覽 {0} 了解更多開發技巧和故事。"
+  },
+  "copy": {
+    "button": "複製",
+    "copied": "已複製"
+  },
+  "links": {
+    "explore": "瀏覽",
+    "github": "GitHub 儲存庫",
+    "visit": "瀏覽",
+    "blog": "我的部落格"
+  }
+}
