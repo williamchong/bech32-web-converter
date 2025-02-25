@@ -139,9 +139,7 @@
           <div class="prose prose-sm max-w-none text-gray-600">
             <p>
               <i18n-t keypath="source.text" scope="global">
-                <template #0>
-                  <a href="https://github.com/williamchong/bech32-web-converter">{{ $t('links.github') }}</a>
-                </template>
+                <a href="https://github.com/williamchong/bech32-web-converter">{{ $t('links.github') }}</a>
               </i18n-t>
             </p>
           </div>
@@ -152,9 +150,7 @@
           <div class="prose prose-sm max-w-none text-gray-600">
             <p>
               <i18n-t keypath="about.text" scope="global">
-                <template #0>
-                  <a href="https://blog.williamchong.cloud">{{ $t('links.blog') }}</a>
-                </template>
+                <a href="https://blog.williamchong.cloud">{{ $t('links.blog') }}</a>
               </i18n-t>
             </p>
           </div>
