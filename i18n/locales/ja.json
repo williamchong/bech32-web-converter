@@ -1,0 +1,57 @@
+{
+  "title": "Bech32 ウォレットアドレスプレフィックスコンバーター",
+  "description": "Cosmos(cosmos1)、Ethereum(0x)のチェックサムアドレス、および異なる Cosmos や EVM ベースのチェーンの bech32 アドレスプレフィックス間で相互変換を行います。",
+  "input": {
+    "title": "入力アドレス",
+    "empty": "アドレスを入力してください",
+    "invalid": "無効なアドレス形式",
+    "buttons": {
+      "keplr": "Keplr を接続",
+      "evm": "Metamask/EVM ウォレットを接続"
+    }
+  },
+  "converted": {
+    "title": "変換されたアドレス",
+    "cosmos": "Cosmos:",
+    "evm": "EVM/Ethereum:",
+    "custom": "カスタムプレフィックス:"
+  },
+  "warning": {
+    "title": "Cosmos (ATOM) と EVM (ETH) の派生パスに関する重要な注意点",
+    "text": {
+      "derivation": "{2} の {0} ({1}) は通常、Ethereum/ETH (60) とは異なることに注意してください！",
+      "chains": "一部の EVM 互換の Cosmos-SDK ベースのチェーン（例: {0}, Dymension）は、派生パスとして 60 を使用します。これらのチェーンに基づいてプレフィックスを変換する際は注意してください。",
+      "cosmostation": "各チェーンの派生パスの例については、{0} をご確認ください。",
+      "2": "これは、このツールが SEED PHRASE (HD ウォレット) から Cosmos と EVM アドレス間の変換を計算できないことを意味します。",
+      "4": "一方、プライベートキーが使用される場合、変換されたアドレスはすべてのチェーンで正しいものになります。",
+      "derivation_link": "派生パス",
+      "slip44_link": "SLIP44",
+      "cosmos_link": "Cosmos/ATOM (118) アドレス",
+      "evmos_link": "Evmos",
+      "cosmostation_link": "Cosmostation のこのドキュメント"
+    }
+  },
+  "eip55": {
+    "title": "EVM チェックサムアドレス (EIP-55) とは？",
+    "text": "チェックサムアドレス ({0}) は、入力ミスを検出するために大文字と小文字を混在させた Ethereum アドレスのシステムです。どの文字を大文字にするかを決定する特別な方法を使用することで、エラーがより明確になり、トランザクションが正しいアドレスに送信されることを保証します。",
+    "eip55_link": "EIP-55"
+  },
+  "source": {
+    "title": "ソース、問題、開発",
+    "text": "ソースコードを表示し、プルリクエストや問題に貢献するには、{0} を参照してください。"
+  },
+  "about": {
+    "title": "私について",
+    "text": "開発者のヒントやストーリーについては、{0} をご覧ください。"
+  },
+  "copy": {
+    "button": "コピー",
+    "copied": "コピーしました"
+  },
+  "links": {
+    "explore": "探索する",
+    "github": "GitHub リポジトリ",
+    "visit": "訪問する",
+    "blog": "私のブログ"
+  }
+}
