@@ -22,6 +22,8 @@
           <div class="mt-4 flex gap-4">
             <button
               v-if="hasKeplr"
+              :title="$t('input.buttons.keplr')"
+              :alt="$t('input.buttons.keplr')"
               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               @click="getKeplrCosmosAddress"
             >
@@ -29,6 +31,8 @@
             </button>
             <button
               v-if="hasEvmWallet"
+              :title="$t('input.buttons.evm')"
+              :alt="$t('input.buttons.evm')"
               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
               @click="getEvmAddress"
             >
@@ -46,7 +50,13 @@
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700">{{ $t('converted.cosmos') }}</label>
-                <button v-if="shouldShowWarningForCosmos" class="text-amber-500" @click="scrollToWarning">
+                <button
+                  v-if="shouldShowWarningForCosmos"
+                  class="text-amber-500"
+                  title="{{ $t('warning.title') }}"
+                  alt="{{ $t('warning.title') }}"
+                  @click="scrollToWarning"
+                >
                   <WarningIcon class="w-5 h-5" />
                 </button>
               </div>
@@ -57,7 +67,13 @@
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700">{{ $t('converted.evm') }}</label>
-                <button v-if="shouldShowWarningForEvm" class="text-amber-500" @click="scrollToWarning">
+                <button
+                  v-if="shouldShowWarningForEvm"
+                  class="text-amber-500"
+                  title="{{ $t('warning.title') }}"
+                  alt="{{ $t('warning.title') }}"
+                  @click="scrollToWarning"
+                >
                   <WarningIcon class="w-5 h-5" />
                 </button>
               </div>
