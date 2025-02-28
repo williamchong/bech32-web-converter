@@ -7,11 +7,11 @@
       v-if="value && isSupported"
       :title="$t('copy.button')"
       :alt="$t('copy.button')"
-      class="px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+      class="px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 flex items-center"
       @click="onClickCopy"
     >
-      <span v-if="!copied">{{ $t('copy.button') }}</span>
-      <span v-else class="text-green-600">{{ $t('copy.copied') }}</span>
+      <Icon v-if="!copied" name="ph:copy" class="h-5 w-5" />
+      <Icon v-else name="ph:check" class="h-5 w-5 text-green-600" />
     </button>
   </div>
 </template>

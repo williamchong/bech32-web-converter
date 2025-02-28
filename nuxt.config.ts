@@ -25,7 +25,15 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["nuxt-gtag", "@vueuse/nuxt", "@nuxtjs/i18n", "@nuxtjs/tailwindcss", "@nuxt/eslint", "@nuxtjs/sitemap"],
+  modules: [
+    "nuxt-gtag",
+    "@vueuse/nuxt",
+    "@nuxtjs/i18n",
+    "@nuxtjs/tailwindcss",
+    "@nuxt/eslint",
+    "@nuxtjs/sitemap",
+    "@nuxt/icon",
+  ],
   gtag: {
     id: "G-J481P5HG5T",
   },

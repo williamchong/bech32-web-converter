@@ -57,7 +57,7 @@
                   alt="{{ $t('warning.title') }}"
                   @click="scrollToWarning"
                 >
-                  <WarningIcon class="w-5 h-5" />
+                  <Icon name="heroicons:exclamation-triangle" class="w-5 h-5" />
                 </button>
               </div>
               <div class="col-span-2">
@@ -74,7 +74,7 @@
                   alt="{{ $t('warning.title') }}"
                   @click="scrollToWarning"
                 >
-                  <WarningIcon class="w-5 h-5" />
+                  <Icon name="heroicons:exclamation-triangle" class="w-5 h-5" />
                 </button>
               </div>
               <div class="col-span-2">
@@ -103,7 +103,11 @@
       <div class="bg-white shadow rounded-lg p-6 space-y-6">
         <section ref="warningSection">
           <div class="flex items-center gap-2 mb-4">
-            <WarningIcon v-if="shouldShowAnyWarning" class="w-6 h-6 text-amber-500" />
+            <Icon
+              v-if="shouldShowAnyWarning"
+              name="heroicons:exclamation-triangle"
+              class="w-6 h-6 text-amber-500"
+            />
             <h2 class="text-xl font-semibold text-gray-900">{{ $t('warning.title') }}</h2>
           </div>
           <div class="prose prose-sm max-w-none text-gray-600">
@@ -176,7 +180,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import WarningIcon from '~/components/WarningIcon.vue'
 import { bech32 } from 'bech32'
 import { convertCosmosToEvm, convertEvmToCosmos } from '~/utils/address'
 import { Buffer } from 'buffer'
