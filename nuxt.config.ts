@@ -41,10 +41,6 @@ export default defineNuxtConfig({
   i18n: {
     baseUrl: 'https://bech32.williamchong.cloud',
     strategy: 'prefix_and_default',
-    detectBrowserLanguage: {
-      useCookie: false,
-      redirectOn: 'root'
-    },
     locales: [
       {
         code: 'en',
