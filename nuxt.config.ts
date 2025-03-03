@@ -38,6 +38,10 @@ export default defineNuxtConfig({
     id: "G-J481P5HG5T",
   },
   plugins: ["~/plugins/node.client.ts"],
+  icon: {
+    provider: 'iconify',
+    serverBundle: false,
+  },
   i18n: {
     baseUrl: 'https://bech32.williamchong.cloud',
     strategy: 'prefix_and_default',
