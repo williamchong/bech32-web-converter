@@ -203,8 +203,10 @@ const isInputEthereum = computed(() => {
 })
 
 onMounted(() => {
-  hasKeplr.value = typeof window.keplr !== 'undefined'
-  hasEvmWallet.value = typeof window.ethereum !== 'undefined'
+  nextTick(()=> {
+    hasKeplr.value = typeof window.keplr !== 'undefined'
+    hasEvmWallet.value = typeof window.ethereum !== 'undefined'
+  })
 })
 
 const convertedWords = computed(() => {
