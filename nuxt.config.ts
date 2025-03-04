@@ -81,8 +81,11 @@ export default defineNuxtConfig({
     ),
     events: path.resolve(__dirname, "node_modules/events"),
   },
-  compatibilityDate: "2024-04-03",
+  compatibilityDate: '2025-02-13',
   devtools: { enabled: true },
+  nitro: {
+    preset: "cloudflare-pages"
+  },
   experimental: {
     clientNodeCompat: true,
   },
