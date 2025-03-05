@@ -203,7 +203,7 @@ const isInputEthereum = computed(() => {
 })
 
 onMounted(() => {
-  nextTick(()=> {
+  onNuxtReady(()=> {
     hasKeplr.value = typeof window.keplr !== 'undefined'
     hasEvmWallet.value = typeof window.ethereum !== 'undefined'
   })
