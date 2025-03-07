@@ -230,7 +230,7 @@ const convertedCosmosAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
   return isInputEthereum.value
     ? convertEvmToCosmos(inputAddress.value)
-    : inputAddress.value
+    : bech32.encode('cosmos', convertedWords.value)
 })
 
 const convertedEvmAddress = computed(() => {
