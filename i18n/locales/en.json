@@ -17,13 +17,13 @@
     "custom": "Custom Prefix:"
   },
   "warning": {
-    "title": "Important Note about Cosmos (ATOM) vs EVM (ETH) Derivation Paths",
+    "title": "Important Note about Cosmos (ATOM) vs EVM (ETH) Address Formats",
     "text": {
       "derivation": "Note that the {0} ({1}) of {2} is usually different from Ethereum/ETH (60)!",
       "chains": "Some EVM-compatible Cosmos-SDK based chains (e.g., {0}, Dymension) use 60 as the derivation path. Please be careful when you are converting prefixes based on these chains.",
       "cosmostation": "For an example list of derivation paths for different chains, please refer to {0}.",
       "2": "This means this tool CANNOT calculate conversion between Cosmos and EVM addresses from a SEED PHRASE (HD Wallet).",
-      "4": "On the other hand, if a PRIVATE KEY is used instead, the converted address would be correct for all chains.",
+      "4": "Even with the same private key, Cosmos and EVM addresses will be different due to secp256k1 public key are compressed or not. This tool converts between address formats, not between keys.",
       "derivation_link": "derivation path",
       "slip44_link": "SLIP44",
       "cosmos_link": "Cosmos/ATOM (118) addresses",

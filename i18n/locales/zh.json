@@ -17,13 +17,13 @@
     "custom": "自定義前綴:"
   },
   "warning": {
-    "title": "重要提示：關於 Cosmos (ATOM) 與 EVM (ETH) 衍生路徑的不同",
+    "title": "重要提示：關於 Cosmos (ATOM) 與 EVM (ETH) 地址格式的不同",
     "text": {
       "derivation": "請注意，{2} 的{0} ({1})通常與 Ethereum/ETH (60) 不同！",
       "chains": "某些與 EVM 相容的基於 Cosmos-SDK 的鏈（例如 {0}、Dymension）會使用 60 作為衍生路徑。在基於不同的鏈進行前綴轉換時請務必小心。",
       "cosmostation": "有關不同鏈的衍生路徑範例列表，請參考 {0}。",
       "2": "這意味著本工具無法計算由同一助記詞（HD 錢包）衍生的正確 Cosmos 和 EVM 地址。",
-      "4": "另一方面，如果地址使用私鑰產生，則轉換後的地址在所有鏈都會是正確的。",
+      "4": "即使使用相同的私鑰，由於分別使用壓縮及非壓縮的 secp256k1 公鑰，Cosmos 和 EVM 地址也會不同。此工具只是在不同地址格式之間進行轉換，而非轉換密鑰本身。",
       "derivation_link": "衍生路徑",
       "slip44_link": "SLIP44",
       "cosmos_link": "Cosmos/ATOM (118) 地址",
