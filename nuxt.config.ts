@@ -25,6 +25,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   modules: [
     "nuxt-gtag",
     "@vueuse/nuxt",
@@ -33,11 +34,15 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxtjs/sitemap",
     "@nuxt/icon",
+    "@sentry/nuxt/module",
   ],
+
   gtag: {
     id: "G-J481P5HG5T",
   },
+
   plugins: ["~/plugins/node.client.ts"],
+
   i18n: {
     baseUrl: 'https://bech32.williamchong.cloud',
     strategy: 'prefix_and_default',
@@ -65,10 +70,12 @@ export default defineNuxtConfig({
     lazy: true,
     defaultLocale: 'en',
   },
+
   site: {
     url: 'https://bech32.williamchong.cloud',
     name: 'Bech32 Wallet Address Prefix Converter',
   },
+
   alias: {
     "readable-stream": path.resolve(__dirname, "node_modules/readable-stream"),
     "process/": path.resolve(
@@ -81,12 +88,26 @@ export default defineNuxtConfig({
     ),
     events: path.resolve(__dirname, "node_modules/events"),
   },
+
   compatibilityDate: '2025-02-13',
   devtools: { enabled: true },
+
   nitro: {
     preset: "cloudflare-pages"
   },
+
   experimental: {
     clientNodeCompat: true,
+  },
+
+  sentry: {
+    sourceMapsUploadOptions: {
+      org: "williamchong",
+      project: "bech32-convertor",
+    },
+  },
+
+  sourcemap: {
+    client: "hidden",
   },
 });
