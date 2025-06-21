@@ -73,11 +73,11 @@ export default defineNuxtConfig({
     "readable-stream": path.resolve(__dirname, "node_modules/readable-stream"),
     "process/": path.resolve(
       __dirname,
-      "node_modules/unenv/runtime/node/process"
+      "node_modules/unenv/dist/runtime/node/process"
     ),
     "string_decoder/": path.resolve(
       __dirname,
-      "node_modules/unenv/runtime/node/string_decoder"
+      "node_modules/unenv/dist/runtime/node/string_decoder"
     ),
     events: path.resolve(__dirname, "node_modules/events"),
   },
