@@ -101,6 +101,16 @@
 
       <!-- Info Sections -->
       <div class="bg-white shadow rounded-lg p-6 space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('bech32.title') }}</h2>
+          <div class="prose prose-sm max-w-none text-gray-600">
+            <p>{{ $t('bech32.text') }}</p>
+            <h3 class="text-lg font-medium text-gray-900 mt-4 mb-2">{{ $t('bech32.useful') }}</h3>
+            <ul class="list-disc list-inside space-y-1">
+              <li v-for="(usecase, index) in $tm('bech32.usecases')" :key="index">{{ $rt(usecase) }}</li>
+            </ul>
+          </div>
+        </section>
         <section ref="warningSection">
           <div class="flex items-center gap-2 mb-4">
             <Icon

@@ -1,6 +1,18 @@
 {
   "title": "Bech32 錢包地址前綴轉換器",
   "description": "在 Cosmos(cosmos1)、以太坊(0x) 校驗和地址，以及不同基於 Cosmos 或 EVM 的鏈上使用 bech32 地址前綴之間進行轉換。",
+  "bech32": {
+    "title": "什麼是 Bech32 地址前綴？",
+    "text": "Bech32 是許多區塊鏈網路使用的地址格式，特別是基於 Cosmos 的鏈。前綴（如 'cosmos'、'osmo'、'juno'）標識地址屬於哪個特定的區塊鏈網路。例如：'cosmos1abc...' 是 Cosmos Hub 地址，而 'osmo1abc...' 是 Osmosis 地址。前綴後的部分包含相同的底層帳戶資訊。",
+    "useful": "什麼時候需要地址轉換？",
+    "usecases": [
+      "跨鏈操作：在不同 Cosmos 鏈上使用相同帳戶時",
+      "多鏈錢包：查看您的帳戶在不同網路上的地址格式",
+      "DeFi 協議：為跨鏈 DeFi 應用程式轉換地址",
+      "開發：在不同區塊鏈環境中測試和除錯",
+      "橋接操作：在 Cosmos 鏈和 EVM 鏈之間轉移資產"
+    ]
+  },
   "input": {
     "title": "輸入地址",
     "empty": "請輸入地址",

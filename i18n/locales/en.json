@@ -1,6 +1,18 @@
 {
   "title": "Bech32 Wallet Address Prefix Converter",
   "description": "Convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chain using bech32 address prefixes.",
+  "bech32": {
+    "title": "What is a Bech32 Address Prefix?",
+    "text": "Bech32 is an address format used by many blockchain networks, especially Cosmos-based chains. The prefix (like 'cosmos', 'osmo', 'juno') identifies which specific blockchain network the address belongs to. For example: 'cosmos1abc...' is a Cosmos Hub address, while 'osmo1abc...' is an Osmosis address. The part after the prefix contains the same underlying account information.",
+    "useful": "When is Address Conversion Useful?",
+    "usecases": [
+      "Cross-chain operations: When using the same account across different Cosmos chains",
+      "Multi-chain wallets: Viewing your account address format for different networks",
+      "DeFi protocols: Converting addresses for cross-chain DeFi applications",
+      "Development: Testing and debugging across different blockchain environments",
+      "Bridge operations: Moving assets between Cosmos chains and EVM chains"
+    ]
+  },
   "input": {
     "title": "Input Address",
     "empty": "Please input address",
