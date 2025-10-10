@@ -60,6 +60,12 @@
     "button": "コピー",
     "copied": "コピーしました"
   },
+  "colorMode": {
+    "toggle": "ダークモード切り替え",
+    "light": "ライトモード",
+    "dark": "ダークモード",
+    "system": "システム設定"
+  },
   "links": {
     "explore": "探索する",
     "github": "GitHub リポジトリ",

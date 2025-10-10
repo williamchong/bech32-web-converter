@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxt/icon",
     "@sentry/nuxt/module",
+    "@nuxtjs/color-mode",
   ],
 
   gtag: {
@@ -98,6 +99,12 @@ export default defineNuxtConfig({
 
   experimental: {
     clientNodeCompat: true,
+  },
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
   },
 
   sentry: {

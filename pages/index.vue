@@ -1,22 +1,23 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+    <ClientOnly><ColorModeToggle /></ClientOnly>
     <div class="max-w-3xl mx-auto space-y-8">
       <!-- Header -->
       <section class="text-center">
-        <h1 class="text-3xl font-bold text-gray-900">{{ $t('title') }}</h1>
-        <p class="mt-2 text-gray-600">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $t('title') }}</h1>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">
           {{ $t('description') }}
         </p>
       </section>
 
-      <div class="bg-white shadow rounded-lg p-6 space-y-6">
+      <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 space-y-6">
         <!-- Input Section -->
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('input.title') }}</h2>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('input.title') }}</h2>
           <input
             v-model="inputAddress"
             placeholder="cosmos1..../0xabcd...."
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             @click.once="onInputAddress"
           >
           <div class="mt-4 flex gap-4">
@@ -39,20 +40,20 @@
               {{ $t('input.buttons.evm') }}
             </button>
           </div>
-          <p v-if="!inputAddress" class="mt-2 text-sm text-gray-500">{{ $t('input.empty') }}</p>
-          <p v-else-if="!isInputValid" class="mt-2 text-sm text-red-600">{{ $t('input.invalid') }}</p>
+          <p v-if="!inputAddress" class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.empty') }}</p>
+          <p v-else-if="!isInputValid" class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $t('input.invalid') }}</p>
         </section>
 
         <!-- Converted Addresses Section -->
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('converted.title') }}</h2>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('converted.title') }}</h2>
           <div class="space-y-4">
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">{{ $t('converted.cosmos') }}</label>
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.cosmos') }}</label>
                 <button
                   v-if="shouldShowWarningForCosmos"
-                  class="text-amber-500"
+                  class="text-amber-500 dark:text-amber-400"
                   title="{{ $t('warning.title') }}"
                   alt="{{ $t('warning.title') }}"
                   @click="scrollToWarning"
@@ -66,10 +67,10 @@
             </div>
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">{{ $t('converted.evm') }}</label>
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.evm') }}</label>
                 <button
                   v-if="shouldShowWarningForEvm"
-                  class="text-amber-500"
+                  class="text-amber-500 dark:text-amber-400"
                   title="{{ $t('warning.title') }}"
                   alt="{{ $t('warning.title') }}"
                   @click="scrollToWarning"
@@ -83,11 +84,11 @@
             </div>
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">{{ $t('converted.custom') }}</label>
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.custom') }}</label>
                 <input
                   v-model="newPrefix"
                   placeholder="osmos"
-                  class="w-24 px-2 py-1 text-sm border border-gray-300 rounded-md"
+                  class="w-24 px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
                   @input.once="onInputPrefix"
                 >
               </div>
@@ -100,12 +101,12 @@
       </div>
 
       <!-- Info Sections -->
-      <div class="bg-white shadow rounded-lg p-6 space-y-6">
+      <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 space-y-6">
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('bech32.title') }}</h2>
-          <div class="prose prose-sm max-w-none text-gray-600">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('bech32.title') }}</h2>
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
             <p>{{ $t('bech32.text') }}</p>
-            <h3 class="text-lg font-medium text-gray-900 mt-4 mb-2">{{ $t('bech32.useful') }}</h3>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mt-4 mb-2">{{ $t('bech32.useful') }}</h3>
             <ul class="list-disc list-inside space-y-1">
               <li v-for="(usecase, index) in $tm('bech32.usecases')" :key="index">{{ $rt(usecase) }}</li>
             </ul>
@@ -116,11 +117,11 @@
             <Icon
               v-if="shouldShowAnyWarning"
               name="heroicons:exclamation-triangle"
-              class="w-6 h-6 text-amber-500"
+              class="w-6 h-6 text-amber-500 dark:text-amber-400"
             />
-            <h2 class="text-xl font-semibold text-gray-900">{{ $t('warning.title') }}</h2>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t('warning.title') }}</h2>
           </div>
-          <div class="prose prose-sm max-w-none text-gray-600">
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="warning.text.derivation" scope="global">
                   <a
@@ -154,8 +155,8 @@
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('eip55.title') }}</h2>
-          <div class="prose prose-sm max-w-none text-gray-600">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('eip55.title') }}</h2>
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="eip55.text" scope="global">
                 <a href="https://eips.ethereum.org/EIPS/eip-55" rel="noopener noreferrer">{{ $t('eip55.eip55_link') }}</a>
@@ -165,8 +166,8 @@
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('source.title') }}</h2>
-          <div class="prose prose-sm max-w-none text-gray-600">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('source.title') }}</h2>
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="source.text" scope="global">
                 <a href="https://github.com/williamchong/bech32-web-converter">{{ $t('links.github') }}</a>
@@ -176,8 +177,8 @@
         </section>
 
         <section>
-          <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ $t('about.title') }}</h2>
-          <div class="prose prose-sm max-w-none text-gray-600">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('about.title') }}</h2>
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="about.text" scope="global">
                 <a href="https://blog.williamchong.cloud">{{ $t('links.blog') }}</a>

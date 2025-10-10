@@ -60,6 +60,12 @@
     "button": "Copy",
     "copied": "Copied"
   },
+  "colorMode": {
+    "toggle": "Toggle dark mode",
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System mode"
+  },
   "links": {
     "explore": "Explore the",
     "github": "GitHub repository",
