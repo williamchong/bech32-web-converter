@@ -17,10 +17,18 @@
     "title": "入力アドレス",
     "empty": "アドレスを入力してください",
     "invalid": "無効なアドレス形式",
+    "invalid_count": "個の無効なアドレス",
+    "hint": "複数のアドレスを1行に1つずつ入力して、バッチ変換を実行できます",
     "buttons": {
       "keplr": "Keplr を接続",
       "evm": "Metamask/EVM ウォレットを接続"
     }
+  },
+  "batch": {
+    "input": "入力",
+    "custom_prefix": "カスタムプレフィックス",
+    "export_csv": "CSV をエクスポート",
+    "export_json": "JSON をエクスポート"
   },
   "converted": {
     "title": "変換されたアドレス",

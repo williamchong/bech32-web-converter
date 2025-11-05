@@ -17,10 +17,18 @@
     "title": "輸入地址",
     "empty": "請輸入地址",
     "invalid": "地址格式無效",
+    "invalid_count": "個無效地址",
+    "hint": "您可以輸入多個地址，每行一個地址，進行批量轉換",
     "buttons": {
       "keplr": "連接 Keplr",
       "evm": "連接 Metamask/EVM 錢包"
     }
+  },
+  "batch": {
+    "input": "輸入",
+    "custom_prefix": "自定義前綴",
+    "export_csv": "匯出 CSV",
+    "export_json": "匯出 JSON"
   },
   "converted": {
     "title": "轉換後的地址",

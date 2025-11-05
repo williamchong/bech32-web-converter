@@ -17,10 +17,18 @@
     "title": "Input Address",
     "empty": "Please input address",
     "invalid": "Invalid Address Format",
+    "invalid_count": "invalid addresses",
+    "hint": "You can enter multiple addresses separated by newlines for batch conversion",
     "buttons": {
       "keplr": "Connect Keplr",
       "evm": "Connect Metamask/EVM Wallet"
     }
+  },
+  "batch": {
+    "input": "Input",
+    "custom_prefix": "Custom Prefix",
+    "export_csv": "Export CSV",
+    "export_json": "Export JSON"
   },
   "converted": {
     "title": "Converted Addresses",

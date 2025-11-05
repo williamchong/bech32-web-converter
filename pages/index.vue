@@ -14,12 +14,14 @@
         <!-- Input Section -->
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('input.title') }}</h2>
-          <input
+          <textarea
             v-model="inputAddress"
-            placeholder="cosmos1..../0xabcd...."
+            placeholder="cosmos1..../0xabcd....&#10;cosmos1..../0xabcd...."
+            rows="6"
             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:ring-indigo-500 focus:border-indigo-500"
             @click.once="onInputAddress"
-          >
+          />
+          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.hint') }}</p>
           <div class="mt-4 flex gap-4">
             <button
               v-if="hasKeplr"
@@ -41,13 +43,46 @@
             </button>
           </div>
           <p v-if="!inputAddress" class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.empty') }}</p>
-          <p v-else-if="!isInputValid" class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $t('input.invalid') }}</p>
+          <p v-else-if="invalidAddresses.length > 0" class="mt-2 text-sm text-red-600 dark:text-red-400">{{ invalidAddresses.length }} {{ $t('input.invalid_count') }}</p>
+        </section>
+
+        <!-- Batch Controls (Custom Prefix + Export) -->
+        <section v-if="validAddresses.length > 1" class="border-t border-gray-200 dark:border-gray-700 pt-6">
+          <div class="flex gap-4 items-end">
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ $t('batch.custom_prefix') }}
+              </label>
+              <input
+                v-model="newPrefix"
+                placeholder="osmos"
+                class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
+                @input.once="onInputPrefix"
+              >
+            </div>
+            <div class="flex gap-2">
+              <button
+                class="px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 whitespace-nowrap"
+                @click="exportBatchResults('csv')"
+              >
+                {{ $t('batch.export_csv') }}
+              </button>
+              <button
+                class="px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 whitespace-nowrap"
+                @click="exportBatchResults('json')"
+              >
+                {{ $t('batch.export_json') }}
+              </button>
+            </div>
+          </div>
         </section>
 
         <!-- Converted Addresses Section -->
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('converted.title') }}</h2>
-          <div class="space-y-4">
+
+          <!-- Single Address Mode or Empty State -->
+          <div v-if="validAddresses.length <= 1" class="space-y-4">
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.cosmos') }}</label>
@@ -95,6 +130,38 @@
               <div class="col-span-2">
                 <CopyableField :value="convertedPrefixAddress" />
               </div>
+            </div>
+          </div>
+
+          <!-- Batch Mode -->
+          <div v-else class="space-y-4">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-gray-700 dark:text-gray-300">
+                <thead class="border-b border-gray-300 dark:border-gray-600">
+                  <tr>
+                    <th class="text-left py-2 px-2">{{ $t('batch.input') }}</th>
+                    <th class="text-left py-2 px-2">{{ $t('converted.cosmos') }}</th>
+                    <th class="text-left py-2 px-2">{{ $t('converted.evm') }}</th>
+                    <th v-if="newPrefix" class="text-left py-2 px-2">{{ newPrefix }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(addr, idx) in validAddresses" :key="idx" class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td class="py-2 px-2">
+                      <CopyButton :value="addr" :index="idx" field="input" :is-copied="copiedIndex === idx && copiedField === 'input'" @copy="copyToClipboard(addr, idx, 'input')" />
+                    </td>
+                    <td class="py-2 px-2">
+                      <CopyButton :value="batchConversions[idx].cosmos" :index="idx" field="cosmos" :is-copied="copiedIndex === idx && copiedField === 'cosmos'" @copy="copyToClipboard(batchConversions[idx].cosmos, idx, 'cosmos')" />
+                    </td>
+                    <td class="py-2 px-2">
+                      <CopyButton :value="batchConversions[idx].evm" :index="idx" field="evm" :is-copied="copiedIndex === idx && copiedField === 'evm'" @copy="copyToClipboard(batchConversions[idx].evm, idx, 'evm')" />
+                    </td>
+                    <td v-if="newPrefix" class="py-2 px-2">
+                      <CopyButton :value="batchConversions[idx].custom" :index="idx" field="custom" :is-copied="copiedIndex === idx && copiedField === 'custom'" @copy="copyToClipboard(batchConversions[idx].custom, idx, 'custom')" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -208,9 +275,61 @@ const inputAddress = ref('')
 const newPrefix = ref('')
 const hasKeplr = ref(false)
 const hasEvmWallet = ref(false)
+const copiedIndex = ref<number | null>(null)
+const copiedField = ref<string | null>(null)
 
-const isInputEthereum = computed(() => {
-  return /^(0x)?[0-9a-fA-F]{40}$/.test(inputAddress.value)
+const validateAddress = (addr: string): boolean => {
+  const trimmed = addr.trim()
+  if (!trimmed) return false
+
+  const isEthereum = /^(0x)?[0-9a-fA-F]{40}$/.test(trimmed)
+
+  if (isEthereum) return true
+
+  try {
+    bech32.decode(trimmed)
+    return true
+  } catch {
+    return false
+  }
+}
+
+const parseAddresses = (input: string): string[] => {
+  return input
+    .split('\n')
+    .map(addr => addr.trim())
+    .filter(addr => addr.length > 0)
+}
+
+const validAddresses = computed(() => {
+  return parseAddresses(inputAddress.value).filter(validateAddress)
+})
+
+const invalidAddresses = computed(() => {
+  return parseAddresses(inputAddress.value).filter(addr => !validateAddress(addr))
+})
+
+const convertAddress = (addr: string) => {
+  const trimmed = addr.trim()
+  const isEthereum = /^(0x)?[0-9a-fA-F]{40}$/.test(trimmed)
+
+  try {
+    const words = isEthereum
+      ? bech32.toWords(Buffer.from(trimmed.replace('0x', ''), 'hex'))
+      : bech32.decode(trimmed).words
+
+    return {
+      cosmos: isEthereum ? convertEvmToCosmos(trimmed) : bech32.encode('cosmos', words),
+      evm: isEthereum ? trimmed : convertCosmosToEvm(trimmed),
+      custom: newPrefix.value ? bech32.encode(newPrefix.value, words) : ''
+    }
+  } catch {
+    return { cosmos: '', evm: '', custom: '' }
+  }
+}
+
+const batchConversions = computed(() => {
+  return validAddresses.value.map(convertAddress)
 })
 
 onMounted(() => {
@@ -220,9 +339,18 @@ onMounted(() => {
   })
 })
 
+// For single address mode (backward compatibility)
+const currentAddress = computed(() => {
+  return validAddresses.value.length === 1 ? validAddresses.value[0] : ''
+})
+
+const isInputEthereum = computed(() => {
+  return /^(0x)?[0-9a-fA-F]{40}$/.test(currentAddress.value)
+})
+
 const convertedWords = computed(() => {
   try {
-    return isInputEthereum.value ? bech32.toWords(Buffer.from(inputAddress.value.replace('0x', ''), 'hex')) : bech32.decode(inputAddress.value).words
+    return isInputEthereum.value ? bech32.toWords(Buffer.from(currentAddress.value.replace('0x', ''), 'hex')) : bech32.decode(currentAddress.value).words
   } catch {
     return []
   }
@@ -240,15 +368,15 @@ const convertedPrefixAddress = computed(() => {
 const convertedCosmosAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
   return isInputEthereum.value
-    ? convertEvmToCosmos(inputAddress.value)
+    ? convertEvmToCosmos(currentAddress.value)
     : bech32.encode('cosmos', convertedWords.value)
 })
 
 const convertedEvmAddress = computed(() => {
   if (convertedWords.value.length === 0) return ''
   return isInputEthereum.value
-    ? inputAddress.value
-    : convertCosmosToEvm(inputAddress.value)
+    ? currentAddress.value
+    : convertCosmosToEvm(currentAddress.value)
 })
 
 async function getKeplrCosmosAddress() {
@@ -295,6 +423,63 @@ const shouldShowAnyWarning = computed(() => {
 function scrollToWarning() {
   warningSection.value?.scrollIntoView({ behavior: 'smooth' })
   useTrackEvent('click_warning')
+}
+
+function copyToClipboard(text: string, index?: number, field?: string): void {
+  if (!text) return
+  navigator.clipboard.writeText(text).then(() => {
+    useTrackEvent('copy_address')
+    // Show visual feedback for batch mode
+    if (index !== undefined && field !== undefined) {
+      copiedIndex.value = index
+      copiedField.value = field
+      setTimeout(() => {
+        copiedIndex.value = null
+        copiedField.value = null
+      }, 2000)
+    }
+  })
+}
+
+function getBatchExportData(): Array<Record<string, string>> {
+  return validAddresses.value.map((addr, idx) => {
+    const conversion = batchConversions.value[idx]
+    const row: Record<string, string> = {
+      input: addr,
+      cosmos: conversion.cosmos,
+      evm: conversion.evm
+    }
+    if (newPrefix.value) {
+      row[newPrefix.value] = conversion.custom
+    }
+    return row
+  })
+}
+
+function exportBatchResults(format: 'csv' | 'json'): void {
+  if (format === 'csv') {
+    const data = getBatchExportData()
+    const headers = Object.keys(data[0] || {})
+    const rows = data.map(row => headers.map(header => row[header]))
+    const csvContent = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n')
+    downloadFile(csvContent, 'batch-conversion.csv', 'text/csv')
+  } else {
+    const jsonContent = JSON.stringify(getBatchExportData(), null, 2)
+    downloadFile(jsonContent, 'batch-conversion.json', 'application/json')
+  }
+  useTrackEvent(`export_${format}`)
+}
+
+function downloadFile(content: string, filename: string, mimeType: string): void {
+  const blob = new Blob([content], { type: mimeType })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
 }
 
 </script>
