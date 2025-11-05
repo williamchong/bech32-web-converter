@@ -135,28 +135,64 @@
 
           <!-- Batch Mode -->
           <div v-else class="space-y-4">
+            <!-- Column Visibility Controls -->
+            <div class="flex flex-wrap gap-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md text-sm text-gray-700 dark:text-gray-300">
+              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
+                <input
+                  v-model="visibleColumns.input"
+                  type="checkbox"
+                  class="w-4 h-4 rounded"
+                >
+                <span>{{ $t('batch.input') }}</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
+                <input
+                  v-model="visibleColumns.cosmos"
+                  type="checkbox"
+                  class="w-4 h-4 rounded"
+                >
+                <span>{{ $t('converted.cosmos') }}</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
+                <input
+                  v-model="visibleColumns.evm"
+                  type="checkbox"
+                  class="w-4 h-4 rounded"
+                >
+                <span>{{ $t('converted.evm') }}</span>
+              </label>
+              <label v-if="newPrefix" class="flex items-center gap-2 cursor-pointer hover:opacity-80">
+                <input
+                  v-model="visibleColumns.custom"
+                  type="checkbox"
+                  class="w-4 h-4 rounded"
+                >
+                <span>{{ newPrefix }}</span>
+              </label>
+            </div>
+
             <div class="overflow-x-auto">
               <table class="w-full text-sm text-gray-700 dark:text-gray-300">
                 <thead class="border-b border-gray-300 dark:border-gray-600">
                   <tr>
-                    <th class="text-left py-2 px-2">{{ $t('batch.input') }}</th>
-                    <th class="text-left py-2 px-2">{{ $t('converted.cosmos') }}</th>
-                    <th class="text-left py-2 px-2">{{ $t('converted.evm') }}</th>
-                    <th v-if="newPrefix" class="text-left py-2 px-2">{{ newPrefix }}</th>
+                    <th v-if="visibleColumns.input" class="py-3 px-2 text-left font-medium">{{ $t('batch.input') }}</th>
+                    <th v-if="visibleColumns.cosmos" class="py-3 px-2 text-left font-medium">{{ $t('converted.cosmos') }}</th>
+                    <th v-if="visibleColumns.evm" class="py-3 px-2 text-left font-medium">{{ $t('converted.evm') }}</th>
+                    <th v-if="visibleColumns.custom && newPrefix" class="py-3 px-2 text-left font-medium">{{ newPrefix }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(addr, idx) in validAddresses" :key="idx" class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <td class="py-2 px-2">
+                    <td v-if="visibleColumns.input" class="py-2 px-2">
                       <CopyButton :value="addr" :index="idx" field="input" :is-copied="copiedIndex === idx && copiedField === 'input'" @copy="copyToClipboard(addr, idx, 'input')" />
                     </td>
-                    <td class="py-2 px-2">
+                    <td v-if="visibleColumns.cosmos" class="py-2 px-2">
                       <CopyButton :value="batchConversions[idx].cosmos" :index="idx" field="cosmos" :is-copied="copiedIndex === idx && copiedField === 'cosmos'" @copy="copyToClipboard(batchConversions[idx].cosmos, idx, 'cosmos')" />
                     </td>
-                    <td class="py-2 px-2">
+                    <td v-if="visibleColumns.evm" class="py-2 px-2">
                       <CopyButton :value="batchConversions[idx].evm" :index="idx" field="evm" :is-copied="copiedIndex === idx && copiedField === 'evm'" @copy="copyToClipboard(batchConversions[idx].evm, idx, 'evm')" />
                     </td>
-                    <td v-if="newPrefix" class="py-2 px-2">
+                    <td v-if="visibleColumns.custom && newPrefix" class="py-2 px-2">
                       <CopyButton :value="batchConversions[idx].custom" :index="idx" field="custom" :is-copied="copiedIndex === idx && copiedField === 'custom'" @copy="copyToClipboard(batchConversions[idx].custom, idx, 'custom')" />
                     </td>
                   </tr>
@@ -277,6 +313,12 @@ const hasKeplr = ref(false)
 const hasEvmWallet = ref(false)
 const copiedIndex = ref<number | null>(null)
 const copiedField = ref<string | null>(null)
+const visibleColumns = ref({
+  input: true,
+  cosmos: true,
+  evm: true,
+  custom: true
+})
 
 const validateAddress = (addr: string): boolean => {
   const trimmed = addr.trim()
@@ -444,14 +486,21 @@ function copyToClipboard(text: string, index?: number, field?: string): void {
 function getBatchExportData(): Array<Record<string, string>> {
   return validAddresses.value.map((addr, idx) => {
     const conversion = batchConversions.value[idx]
-    const row: Record<string, string> = {
-      input: addr,
-      cosmos: conversion.cosmos,
-      evm: conversion.evm
+    const row: Record<string, string> = {}
+
+    if (visibleColumns.value.input) {
+      row.input = addr
     }
-    if (newPrefix.value) {
+    if (visibleColumns.value.cosmos) {
+      row.cosmos = conversion.cosmos
+    }
+    if (visibleColumns.value.evm) {
+      row.evm = conversion.evm
+    }
+    if (visibleColumns.value.custom && newPrefix.value) {
       row[newPrefix.value] = conversion.custom
     }
+
     return row
   })
 }
