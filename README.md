@@ -1,6 +1,18 @@
 # Bech32 Wallet Address Prefix Converter
 
-Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.
+Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chains using bech32 address prefixes. Process multiple addresses at once with CSV and JSON export support.
+
+## Features
+
+- **Batch Conversion**: Convert multiple addresses at once (up to 100+)
+- **Single Address Mode**: Convert one address with detailed output
+- **Multiple Formats**: Support for Cosmos (bech32) and Ethereum (0x) address formats
+- **Custom Prefixes**: Generate addresses with custom bech32 prefixes (osmos, juno, etc.)
+- **Export Options**: Export batch results as CSV or JSON
+- **Column Toggle**: Show/hide individual columns in batch output
+- **Wallet Integration**: Auto-fill addresses from Keplr (Cosmos) or MetaMask (EVM)
+- **Dark Mode**: Built-in light/dark mode support
+- **Multilingual**: Support for English, Chinese (中文), and Japanese (日本語)
 
 ## Setup
 

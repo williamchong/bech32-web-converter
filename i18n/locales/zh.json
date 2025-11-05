@@ -1,6 +1,6 @@
 {
   "title": "Bech32 錢包地址前綴轉換器",
-  "description": "在 Cosmos(cosmos1)、以太坊(0x) 校驗和地址，以及不同基於 Cosmos 或 EVM 的鏈上使用 bech32 地址前綴之間進行轉換。",
+  "description": "批量轉換 Cosmos(cosmos1)、以太坊(0x) 校驗和地址，以及不同基於 Cosmos 或 EVM 的鏈上使用 bech32 地址前綴。一次處理多個地址並支援匯出功能。",
   "bech32": {
     "title": "什麼是 Bech32 地址前綴？",
     "text": "Bech32 是許多區塊鏈網路使用的地址格式，特別是基於 Cosmos 的鏈。前綴（如 'cosmos'、'osmo'、'juno'）標識地址屬於哪個特定的區塊鏈網路。例如：'cosmos1abc...' 是 Cosmos Hub 地址，而 'osmo1abc...' 是 Osmosis 地址。前綴後的部分包含相同的底層帳戶資訊。",
@@ -18,7 +18,7 @@
     "empty": "請輸入地址",
     "invalid": "地址格式無效",
     "invalid_count": "個無效地址",
-    "hint": "您可以輸入多個地址，每行一個地址，進行批量轉換",
+    "hint": "輸入一個或多個地址（每行一個）進行即時批量轉換。連接錢包以自動填入。",
     "buttons": {
       "keplr": "連接 Keplr",
       "evm": "連接 Metamask/EVM 錢包"
@@ -26,9 +26,21 @@
   },
   "batch": {
     "input": "輸入",
-    "custom_prefix": "自定義前綴",
+    "custom_prefix": "自定義前綴（選填）",
     "export_csv": "匯出 CSV",
-    "export_json": "匯出 JSON"
+    "export_json": "匯出 JSON",
+    "columns": "顯示列",
+    "feature": {
+      "title": "批量轉換和匯出",
+      "description": "高效地一次處理多個地址。每行輸入一個地址，立即將其轉換為所有支援的格式。使用列切換來自定義您的視圖，並將結果匯出為 CSV 或 JSON，以便與其他工具集成。",
+      "features": [
+        "在單次操作中轉換無限數量的地址",
+        "切換列以僅顯示所需的格式",
+        "使用自定義區塊鏈前綴生成地址",
+        "以 CSV 格式匯出批量結果以用於電子表格應用程式",
+        "以 JSON 格式匯出批量結果供程式使用"
+      ]
+    }
   },
   "converted": {
     "title": "轉換後的地址",

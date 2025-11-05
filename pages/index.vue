@@ -221,6 +221,17 @@
             </ul>
           </div>
         </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('batch.feature.title') }}</h2>
+          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+            <p>{{ $t('batch.feature.description') }}</p>
+            <ul class="list-disc list-inside space-y-1 mt-3">
+              <li v-for="(feature, index) in $tm('batch.feature.features')" :key="index">{{ $rt(feature) }}</li>
+            </ul>
+          </div>
+        </section>
+
         <section ref="warningSection">
           <div class="flex items-center gap-2 mb-4">
             <Icon
