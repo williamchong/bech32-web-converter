@@ -4,10 +4,11 @@
       'text-green-600 dark:text-green-400': isCopied,
       'text-blue-600 dark:text-blue-400': !isCopied
     }"
-    class="hover:underline"
+    class="hover:underline block w-full text-left overflow-hidden text-ellipsis whitespace-nowrap"
+    :title="value"
     @click="$emit('copy')"
   >
-    {{ isCopied ? '✓ ' : '' }}{{ truncateAddress(value) }}
+    {{ isCopied ? '✓ ' : '' }}{{ value }}
   </button>
 </template>
 
@@ -23,9 +24,4 @@ defineProps<Props>()
 defineEmits<{
   copy: []
 }>()
-
-function truncateAddress(addr: string, maxLength: number = 12): string {
-  if (addr.length <= maxLength) return addr
-  return addr.slice(0, 6) + '...' + addr.slice(-6)
-}
 </script>

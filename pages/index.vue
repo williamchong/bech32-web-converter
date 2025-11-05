@@ -171,8 +171,14 @@
               </label>
             </div>
 
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm text-gray-700 dark:text-gray-300">
+            <div class="w-full">
+              <table class="w-full text-sm text-gray-700 dark:text-gray-300 table-fixed">
+                <colgroup>
+                  <col v-if="visibleColumns.input" class="w-1/2">
+                  <col v-if="visibleColumns.cosmos" class="w-1/2">
+                  <col v-if="visibleColumns.evm" class="w-1/2">
+                  <col v-if="visibleColumns.custom && newPrefix" class="w-1/2">
+                </colgroup>
                 <thead class="border-b border-gray-300 dark:border-gray-600">
                   <tr>
                     <th v-if="visibleColumns.input" class="py-3 px-2 text-left font-medium">{{ $t('batch.input') }}</th>
