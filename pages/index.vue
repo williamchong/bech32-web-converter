@@ -311,6 +311,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useStorage } from '@vueuse/core'
 import { bech32 } from 'bech32'
 import { convertCosmosToEvm, convertEvmToCosmos } from '~/utils/address'
 import { Buffer } from 'buffer'
@@ -325,7 +326,7 @@ declare global {
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 const inputAddress = ref('')
-const newPrefix = ref('')
+const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '')
 const hasKeplr = ref(false)
 const hasEvmWallet = ref(false)
 const copiedIndex = ref<number | null>(null)
