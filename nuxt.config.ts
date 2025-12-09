@@ -114,6 +114,13 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    define: {
+      __SENTRY_DEBUG__: false,
+      __SENTRY_TRACING__: false,
+    },
+  },
+
   sourcemap: {
     client: "hidden",
   },
