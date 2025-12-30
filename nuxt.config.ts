@@ -87,6 +87,8 @@ export default defineNuxtConfig({
       __dirname,
       "node_modules/unenv/dist/runtime/node/string_decoder"
     ),
+    "node:events": path.resolve(__dirname, "node_modules/events"),
+    "node:tty": path.resolve(__dirname, "node_modules/unenv/dist/runtime/node/tty"),
     events: path.resolve(__dirname, "node_modules/events"),
   },
 

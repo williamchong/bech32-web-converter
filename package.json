@@ -22,8 +22,10 @@
     "@vueuse/core": "^13.4.0",
     "@vueuse/nuxt": "^13.4.0",
     "bech32": "^2.0.0",
+    "buffer": "^6.0.3",
+    "events": "^3.3.0",
     "keccak256": "^1.0.6",
-    "nuxt": "^3.17.5",
+    "nuxt": "^3.20.2",
     "nuxt-gtag": "^3.0.3",
     "vue": "latest"
   },
