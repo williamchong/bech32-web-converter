@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-(--ui-bg) py-8">
     <ClientOnly><ColorModeToggle /></ClientOnly>
-    <div class="max-w-3xl mx-auto space-y-8">
+    <UContainer class="max-w-3xl space-y-8">
       <!-- Header -->
       <section class="text-center">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $t('title') }}</h1>
@@ -10,70 +10,44 @@
         </p>
       </section>
 
-      <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6 space-y-6">
+      <UCard :ui="{ body: 'space-y-6' }">
         <!-- Input Section -->
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('input.title') }}</h2>
-          <textarea
+          <UTextarea
             ref="textareaRef"
             v-model="inputAddress"
             placeholder="cosmos1..../0xabcd....&#10;cosmos1..../0xabcd...."
-            rows="6"
-            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            :rows="6"
+            class="w-full"
             @click.once="onInputAddress"
           />
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.hint') }}</p>
           <div class="mt-4 flex gap-4">
-            <button
-              v-if="hasKeplr"
-              :title="$t('input.buttons.keplr')"
-              :alt="$t('input.buttons.keplr')"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-              @click="getKeplrCosmosAddress"
-            >
-              {{ $t('input.buttons.keplr') }}
-            </button>
-            <button
-              v-if="hasEvmWallet"
-              :title="$t('input.buttons.evm')"
-              :alt="$t('input.buttons.evm')"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-              @click="getEvmAddress"
-            >
-              {{ $t('input.buttons.evm') }}
-            </button>
+            <UButton v-if="hasKeplr" :label="$t('input.buttons.keplr')" @click="getKeplrCosmosAddress" />
+            <UButton v-if="hasEvmWallet" :label="$t('input.buttons.evm')" @click="getEvmAddress" />
           </div>
           <p v-if="!inputAddress" class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.empty') }}</p>
           <p v-else-if="invalidAddresses.length > 0" class="mt-2 text-sm text-red-600 dark:text-red-400">{{ invalidAddresses.length }} {{ $t('input.invalid_count') }}</p>
         </section>
 
         <!-- Batch Controls (Custom Prefix + Export) -->
-        <section v-if="validAddresses.length > 1" class="border-t border-gray-200 dark:border-gray-700 pt-6">
+        <USeparator v-if="validAddresses.length > 1" />
+        <section v-if="validAddresses.length > 1">
           <div class="flex gap-4 items-end">
             <div class="flex-1">
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {{ $t('batch.custom_prefix') }}
               </label>
-              <input
+              <UInput
                 v-model="newPrefix"
                 placeholder="osmos"
-                class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
                 @input.once="onInputPrefix"
-              >
+              />
             </div>
             <div class="flex gap-2">
-              <button
-                class="px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 whitespace-nowrap"
-                @click="exportBatchResults('csv')"
-              >
-                {{ $t('batch.export_csv') }}
-              </button>
-              <button
-                class="px-4 py-2 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 whitespace-nowrap"
-                @click="exportBatchResults('json')"
-              >
-                {{ $t('batch.export_json') }}
-              </button>
+              <UButton color="success" :label="$t('batch.export_csv')" @click="exportBatchResults('csv')" />
+              <UButton color="success" :label="$t('batch.export_json')" @click="exportBatchResults('json')" />
             </div>
           </div>
         </section>
@@ -87,15 +61,14 @@
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.cosmos') }}</label>
-                <button
+                <UButton
                   v-if="shouldShowWarningForCosmos"
-                  class="text-amber-500 dark:text-amber-400"
-                  title="{{ $t('warning.title') }}"
-                  alt="{{ $t('warning.title') }}"
+                  icon="heroicons:exclamation-triangle"
+                  variant="ghost"
+                  color="warning"
+                  size="xs"
                   @click="scrollToWarning"
-                >
-                  <Icon name="heroicons:exclamation-triangle" class="w-5 h-5" />
-                </button>
+                />
               </div>
               <div class="col-span-2">
                 <CopyableField :value="convertedCosmosAddress" />
@@ -104,15 +77,14 @@
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.evm') }}</label>
-                <button
+                <UButton
                   v-if="shouldShowWarningForEvm"
-                  class="text-amber-500 dark:text-amber-400"
-                  title="{{ $t('warning.title') }}"
-                  alt="{{ $t('warning.title') }}"
+                  icon="heroicons:exclamation-triangle"
+                  variant="ghost"
+                  color="warning"
+                  size="xs"
                   @click="scrollToWarning"
-                >
-                  <Icon name="heroicons:exclamation-triangle" class="w-5 h-5" />
-                </button>
+                />
               </div>
               <div class="col-span-2">
                 <CopyableField :value="convertedEvmAddress" />
@@ -121,12 +93,13 @@
             <div class="grid grid-cols-3 gap-4 items-center">
               <div class="flex items-center gap-2">
                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('converted.custom') }}</label>
-                <input
+                <UInput
                   v-model="newPrefix"
                   placeholder="osmos"
-                  class="w-24 px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
+                  size="xs"
+                  class="w-24"
                   @input.once="onInputPrefix"
-                >
+                />
               </div>
               <div class="col-span-2">
                 <CopyableField :value="convertedPrefixAddress" />
@@ -137,39 +110,11 @@
           <!-- Batch Mode -->
           <div v-else class="space-y-4">
             <!-- Column Visibility Controls -->
-            <div class="flex flex-wrap gap-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md text-sm text-gray-700 dark:text-gray-300">
-              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
-                <input
-                  v-model="visibleColumns.input"
-                  type="checkbox"
-                  class="w-4 h-4 rounded-sm"
-                >
-                <span>{{ $t('batch.input') }}</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
-                <input
-                  v-model="visibleColumns.cosmos"
-                  type="checkbox"
-                  class="w-4 h-4 rounded-sm"
-                >
-                <span>{{ $t('converted.cosmos') }}</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer hover:opacity-80">
-                <input
-                  v-model="visibleColumns.evm"
-                  type="checkbox"
-                  class="w-4 h-4 rounded-sm"
-                >
-                <span>{{ $t('converted.evm') }}</span>
-              </label>
-              <label v-if="newPrefix" class="flex items-center gap-2 cursor-pointer hover:opacity-80">
-                <input
-                  v-model="visibleColumns.custom"
-                  type="checkbox"
-                  class="w-4 h-4 rounded-sm"
-                >
-                <span>{{ newPrefix }}</span>
-              </label>
+            <div class="flex flex-wrap gap-4 p-3 bg-(--ui-bg-elevated) rounded-md">
+              <UCheckbox v-model="visibleColumns.input" :label="$t('batch.input')" />
+              <UCheckbox v-model="visibleColumns.cosmos" :label="$t('converted.cosmos')" />
+              <UCheckbox v-model="visibleColumns.evm" :label="$t('converted.evm')" />
+              <UCheckbox v-if="newPrefix" v-model="visibleColumns.custom" :label="newPrefix" />
             </div>
 
             <div class="w-full">
@@ -208,10 +153,10 @@
             </div>
           </div>
         </section>
-      </div>
+      </UCard>
 
       <!-- Info Sections -->
-      <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6 space-y-6">
+      <UCard :ui="{ body: 'space-y-6' }">
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('bech32.title') }}</h2>
           <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
@@ -307,8 +252,8 @@
             </p>
           </div>
         </section>
-      </div>
-    </div>
+      </UCard>
+    </UContainer>
   </div>
 </template>
 <script setup lang="ts">
@@ -326,7 +271,7 @@ declare global {
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
-const textareaRef = ref<HTMLTextAreaElement | null>(null)
+const textareaRef = ref<{ textareaRef: HTMLTextAreaElement | null } | null>(null)
 const inputAddress = ref('')
 const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '')
 const hasKeplr = ref(false)
@@ -395,8 +340,9 @@ const batchConversions = computed(() => {
 })
 
 onMounted(() => {
-  if (textareaRef.value && textareaRef.value.value) {
-    inputAddress.value = textareaRef.value.value
+  const el = textareaRef.value?.textareaRef
+  if (el && el.value) {
+    inputAddress.value = el.value as string
   }
   onNuxtReady(()=> {
     hasKeplr.value = typeof window.keplr !== 'undefined'
