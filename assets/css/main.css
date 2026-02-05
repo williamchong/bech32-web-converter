@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+.info-section a {
+  @apply text-indigo-600 dark:text-indigo-400 hover:underline;
+}

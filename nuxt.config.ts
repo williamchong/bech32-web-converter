@@ -26,16 +26,17 @@ export default defineNuxtConfig({
     },
   },
 
+  css: ['~/assets/css/main.css'],
+
   modules: [
     "nuxt-gtag",
     "@vueuse/nuxt",
     "@nuxtjs/i18n",
-    "@nuxtjs/tailwindcss",
+    "@nuxt/ui",
     "@nuxt/eslint",
     "@nuxtjs/sitemap",
     "@nuxt/icon",
     "@sentry/nuxt/module",
-    "@nuxtjs/color-mode",
   ],
 
   gtag: {
@@ -101,12 +102,6 @@ export default defineNuxtConfig({
 
   experimental: {
     clientNodeCompat: true,
-  },
-
-  colorMode: {
-    classSuffix: '',
-    preference: 'system',
-    fallback: 'light',
   },
 
   sentry: {

@@ -10,7 +10,7 @@
         </p>
       </section>
 
-      <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 space-y-6">
+      <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6 space-y-6">
         <!-- Input Section -->
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('input.title') }}</h2>
@@ -141,7 +141,7 @@
                 <input
                   v-model="visibleColumns.input"
                   type="checkbox"
-                  class="w-4 h-4 rounded"
+                  class="w-4 h-4 rounded-sm"
                 >
                 <span>{{ $t('batch.input') }}</span>
               </label>
@@ -149,7 +149,7 @@
                 <input
                   v-model="visibleColumns.cosmos"
                   type="checkbox"
-                  class="w-4 h-4 rounded"
+                  class="w-4 h-4 rounded-sm"
                 >
                 <span>{{ $t('converted.cosmos') }}</span>
               </label>
@@ -157,7 +157,7 @@
                 <input
                   v-model="visibleColumns.evm"
                   type="checkbox"
-                  class="w-4 h-4 rounded"
+                  class="w-4 h-4 rounded-sm"
                 >
                 <span>{{ $t('converted.evm') }}</span>
               </label>
@@ -165,7 +165,7 @@
                 <input
                   v-model="visibleColumns.custom"
                   type="checkbox"
-                  class="w-4 h-4 rounded"
+                  class="w-4 h-4 rounded-sm"
                 >
                 <span>{{ newPrefix }}</span>
               </label>
@@ -210,10 +210,10 @@
       </div>
 
       <!-- Info Sections -->
-      <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 space-y-6">
+      <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6 space-y-6">
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('bech32.title') }}</h2>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>{{ $t('bech32.text') }}</p>
             <h3 class="text-lg font-medium text-gray-900 dark:text-white mt-4 mb-2">{{ $t('bech32.useful') }}</h3>
             <ul class="list-disc list-inside space-y-1">
@@ -224,7 +224,7 @@
 
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('batch.feature.title') }}</h2>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>{{ $t('batch.feature.description') }}</p>
             <ul class="list-disc list-inside space-y-1 mt-3">
               <li v-for="(feature, index) in $tm('batch.feature.features')" :key="index">{{ $rt(feature) }}</li>
@@ -241,7 +241,7 @@
             />
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t('warning.title') }}</h2>
           </div>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="warning.text.derivation" scope="global">
                   <a
@@ -276,7 +276,7 @@
 
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('eip55.title') }}</h2>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="eip55.text" scope="global">
                 <a href="https://eips.ethereum.org/EIPS/eip-55" rel="noopener noreferrer">{{ $t('eip55.eip55_link') }}</a>
@@ -287,7 +287,7 @@
 
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('source.title') }}</h2>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="source.text" scope="global">
                 <a href="https://github.com/williamchong/bech32-web-converter">{{ $t('links.github') }}</a>
@@ -298,7 +298,7 @@
 
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('about.title') }}</h2>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+          <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="about.text" scope="global">
                 <a href="https://blog.williamchong.cloud">{{ $t('links.blog') }}</a>
