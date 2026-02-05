@@ -1,5 +1,7 @@
 # Bech32 Wallet Address Prefix Converter
 
+Live demo: [bech32.williamchong.cloud](https://bech32.williamchong.cloud)
+
 Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chains using bech32 address prefixes. Process multiple addresses at once with CSV and JSON export support.
 
 ## Features
@@ -14,22 +16,24 @@ Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different 
 - **Dark Mode**: Built-in light/dark mode support
 - **Multilingual**: Support for English, Chinese (中文), and Japanese (日本語)
 
+## Tech Stack
+
+- [Nuxt 3](https://nuxt.com/) + [Vue 3](https://vuejs.org/)
+- [Nuxt UI v3](https://ui.nuxt.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vitest](https://vitest.dev/) for testing
+- Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)
+
+## Prerequisites
+
+- Node.js >= 20.20.0
+- [Yarn](https://classic.yarnpkg.com/) (specified via corepack)
+
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
+corepack enable
 yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -37,17 +41,7 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -55,33 +49,19 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
 yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
 yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Testing
+
+```bash
+yarn test
+yarn lint
+yarn typecheck
+```
