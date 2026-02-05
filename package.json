@@ -1,6 +1,9 @@
 {
   "name": "bech32-web-converter",
   "type": "module",
+  "engines": {
+    "node": ">=20.20.0"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
