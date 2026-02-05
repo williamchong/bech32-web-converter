@@ -15,6 +15,7 @@
         <section>
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ $t('input.title') }}</h2>
           <textarea
+            ref="textareaRef"
             v-model="inputAddress"
             placeholder="cosmos1..../0xabcd....&#10;cosmos1..../0xabcd...."
             rows="6"
@@ -325,6 +326,7 @@ declare global {
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
+const textareaRef = ref<HTMLTextAreaElement | null>(null)
 const inputAddress = ref('')
 const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '')
 const hasKeplr = ref(false)
@@ -393,6 +395,9 @@ const batchConversions = computed(() => {
 })
 
 onMounted(() => {
+  if (textareaRef.value && textareaRef.value.value) {
+    inputAddress.value = textareaRef.value.value
+  }
   onNuxtReady(()=> {
     hasKeplr.value = typeof window.keplr !== 'undefined'
     hasEvmWallet.value = typeof window.ethereum !== 'undefined'
