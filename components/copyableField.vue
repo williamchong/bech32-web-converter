@@ -21,7 +21,7 @@ const props = defineProps<{
 }>()
 
 
-const { copy, copied, isSupported } = useClipboard({ source: props.value })
+const { copy, copied, isSupported } = useClipboard({ source: () => props.value })
 function onClickCopy() {
   copy(props.value)
   useTrackEvent('copy')

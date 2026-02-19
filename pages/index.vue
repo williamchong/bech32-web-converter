@@ -392,21 +392,28 @@ const convertedEvmAddress = computed(() => {
 
 async function getKeplrCosmosAddress() {
   useTrackEvent('connect_keplr')
-  const chainId = 'cosmoshub-4';
-  await window.keplr.enable(chainId);
+  try {
+    const chainId = 'cosmoshub-4';
+    await window.keplr.enable(chainId);
 
-  const offlineSigner = window.keplr.getOfflineSigner(chainId);
-  const accounts = await offlineSigner.getAccounts();
-  useTrackEvent('connect_keplr_success')
-  inputAddress.value = accounts[0].address;
+    const offlineSigner = window.keplr.getOfflineSigner(chainId);
+    const accounts = await offlineSigner.getAccounts();
+    useTrackEvent('connect_keplr_success')
+    inputAddress.value = accounts[0].address;
+  } catch (e) {
+    console.error('Keplr connection failed:', e)
+  }
 }
 
 async function getEvmAddress() {
   useTrackEvent('connect_ethereum')
-  await window.ethereum.enable();
-  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-  useTrackEvent('connect_ethereum_success')
-  inputAddress.value = accounts[0];
+  try {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    useTrackEvent('connect_ethereum_success')
+    inputAddress.value = accounts[0];
+  } catch (e) {
+    console.error('EVM wallet connection failed:', e)
+  }
 }
 
 function onInputAddress() {
