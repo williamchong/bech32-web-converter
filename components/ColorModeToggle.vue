@@ -13,6 +13,16 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 
+const modes = ['light', 'dark', 'system'] as const
+const { state: currentMode, next: cycleNext } = useCycleList([...modes], {
+  initialValue: colorMode.preference as typeof modes[number],
+})
+
+function toggleColorMode() {
+  cycleNext()
+  colorMode.preference = currentMode.value
+}
+
 const colorModeIcon = computed(() => {
   switch (colorMode.preference) {
     case 'light': return 'heroicons:sun'
@@ -20,11 +30,4 @@ const colorModeIcon = computed(() => {
     default: return 'heroicons:computer-desktop'
   }
 })
-
-function toggleColorMode() {
-  const modes = ['light', 'dark', 'system'] as const
-  const currentIndex = modes.indexOf(colorMode.preference as typeof modes[number])
-  const nextIndex = (currentIndex + 1) % modes.length
-  colorMode.preference = modes[nextIndex]
-}
 </script>

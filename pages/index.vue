@@ -262,7 +262,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core'
+import { useStorage, refAutoReset, useClipboard } from '@vueuse/core'
 import { bech32 } from 'bech32'
 import { convertCosmosToEvm, convertEvmToCosmos } from '~/utils/address'
 import { Buffer } from 'buffer'
@@ -281,8 +281,8 @@ const inputAddress = ref('')
 const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '')
 const hasKeplr = ref(false)
 const hasEvmWallet = ref(false)
-const copiedIndex = ref<number | null>(null)
-const copiedField = ref<string | null>(null)
+const copiedIndex = refAutoReset<number | null>(null, 2000)
+const copiedField = refAutoReset<string | null>(null, 2000)
 const visibleColumns = ref({
   input: true,
   cosmos: true,
@@ -444,18 +444,15 @@ function scrollToWarning() {
   useTrackEvent('click_warning')
 }
 
+const { copy } = useClipboard()
+
 function copyToClipboard(text: string, index?: number, field?: string): void {
   if (!text) return
-  navigator.clipboard.writeText(text).then(() => {
+  copy(text).then(() => {
     useTrackEvent('copy_address')
-    // Show visual feedback for batch mode
     if (index !== undefined && field !== undefined) {
       copiedIndex.value = index
       copiedField.value = field
-      setTimeout(() => {
-        copiedIndex.value = null
-        copiedField.value = null
-      }, 2000)
     }
   })
 }
