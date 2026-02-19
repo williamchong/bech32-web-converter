@@ -192,12 +192,15 @@
               <i18n-t keypath="warning.text.derivation" scope="global">
                   <a
                     href="https://www.ledger.com/blog/understanding-crypto-addresses-and-derivation-paths"
+                    target="_blank"
                     rel="noopener noreferrer">{{ $t('warning.text.derivation_link') }}</a>
                   <a
-                    href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md" 
+                    href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md"
+                    target="_blank"
                     rel="noopener noreferrer">{{ $t('warning.text.slip44_link') }}</a>
                   <a
                     href="https://medium.com/chainapsis/keplr-explained-coin-type-118-9781d26b2c4e"
+                    target="_blank"
                     rel="noopener noreferrer">{{ $t('warning.text.cosmos_link') }}</a>
               </i18n-t>
             </p>
@@ -205,7 +208,8 @@
             <p>
               <i18n-t keypath="warning.text.chains" scope="global">
                   <a
-                    href="https://docs.evmos.org/protocol/concepts/accounts#evmos-accounts" 
+                    href="https://docs.evmos.org/protocol/concepts/accounts#evmos-accounts"
+                    target="_blank"
                     rel="noopener noreferrer">{{ $t('warning.text.evmos_link') }}</a>
               </i18n-t>
             </p>
@@ -214,6 +218,7 @@
               <i18n-t keypath="warning.text.cosmostation" scope="global">
                   <a
                     href="https://github.com/cosmostation/cosmostation-ios?tab=readme-ov-file#supporting-chains-cosmos"
+                    target="_blank"
                     rel="noopener noreferrer">{{ $t('warning.text.cosmostation_link') }}</a>
               </i18n-t>
             </p>
@@ -225,7 +230,7 @@
           <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="eip55.text" scope="global">
-                <a href="https://eips.ethereum.org/EIPS/eip-55" rel="noopener noreferrer">{{ $t('eip55.eip55_link') }}</a>
+                <a href="https://eips.ethereum.org/EIPS/eip-55" target="_blank" rel="noopener noreferrer">{{ $t('eip55.eip55_link') }}</a>
               </i18n-t>
             </p>
           </div>
@@ -236,7 +241,7 @@
           <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="source.text" scope="global">
-                <a href="https://github.com/williamchong/bech32-web-converter">{{ $t('links.github') }}</a>
+                <a href="https://github.com/williamchong/bech32-web-converter" target="_blank" rel="noopener noreferrer">{{ $t('links.github') }}</a>
               </i18n-t>
             </p>
           </div>
@@ -247,7 +252,7 @@
           <div class="info-section space-y-3 text-sm text-gray-600 dark:text-gray-300">
             <p>
               <i18n-t keypath="about.text" scope="global">
-                <a href="https://blog.williamchong.cloud">{{ $t('links.blog') }}</a>
+                <a href="https://blog.williamchong.cloud" target="_blank" rel="noopener noreferrer">{{ $t('links.blog') }}</a>
               </i18n-t>
             </p>
           </div>
@@ -367,10 +372,6 @@ const convertedWords = computed(() => {
   }
 })
 
-const isInputValid = computed(() => {
-  return convertedWords.value.length > 0
-})
-
 const convertedPrefixAddress = computed(() => {
   if (!newPrefix.value || convertedWords.value.length === 0) return '';
   return bech32.encode(newPrefix.value, convertedWords.value)
@@ -427,11 +428,11 @@ function onInputPrefix() {
 const warningSection = ref<HTMLElement | null>(null)
 
 const shouldShowWarningForEvm = computed(() => {
-  return isInputValid.value && !isInputEthereum.value
+  return convertedWords.value.length > 0 && !isInputEthereum.value
 })
 
 const shouldShowWarningForCosmos = computed(() => {
-  return isInputValid.value && isInputEthereum.value
+  return convertedWords.value.length > 0 && isInputEthereum.value
 })
 
 const shouldShowAnyWarning = computed(() => {
