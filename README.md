@@ -22,7 +22,7 @@ Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different 
 - [Nuxt UI v3](https://ui.nuxt.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/) for testing
-- Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)
+- Deployed on [GitHub Pages](https://pages.github.com/)
 
 ## Prerequisites
 
@@ -36,32 +36,13 @@ corepack enable
 yarn install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Commands
 
 ```bash
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-yarn preview
-```
-
-## Testing
-
-```bash
-yarn test
-yarn lint
-yarn typecheck
+yarn dev          # Start dev server on http://localhost:3000
+yarn build        # Production build (GitHub Pages)
+yarn preview      # Preview production build locally
+yarn test         # Run tests (Vitest)
+yarn lint         # Run ESLint
+yarn typecheck    # Run TypeScript type checking
 ```

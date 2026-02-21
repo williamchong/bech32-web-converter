@@ -16,7 +16,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
       - run: yarn
-      - run: npx nuxt build --preset github_pages
+      - run: yarn build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
