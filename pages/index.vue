@@ -278,7 +278,7 @@ declare global {
 
 const textareaRef = ref<{ textareaRef: HTMLTextAreaElement | null } | null>(null)
 const inputAddress = ref('')
-const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '')
+const newPrefix = useStorage<string | null>('bech32-converter-new-prefix', '', undefined, { initOnMounted: true })
 const hasKeplr = ref(false)
 const hasEvmWallet = ref(false)
 const copiedIndex = refAutoReset<number | null>(null, 2000)

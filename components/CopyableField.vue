@@ -4,7 +4,7 @@
       {{ value || '-' }}
     </code>
     <UButton
-      v-if="value && isSupported"
+      v-if="value"
       :icon="copied ? 'ph:check' : 'ph:copy'"
       :color="copied ? 'success' : 'neutral'"
       variant="outline"
@@ -21,7 +21,7 @@ const props = defineProps<{
 }>()
 
 
-const { copy, copied, isSupported } = useClipboard({ source: () => props.value })
+const { copy, copied } = useClipboard({ source: () => props.value })
 function onClickCopy() {
   copy(props.value)
   useTrackEvent('copy')
