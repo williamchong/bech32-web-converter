@@ -13,7 +13,7 @@ export default defineNuxtConfig({
         {
           name: "description",
           content:
-            "Convert between Cosmos(cosmos1), Ethereum(0x) and different cosmos-based chain using bech32 address prefixes.",
+            "Convert wallet addresses between Cosmos and Ethereum formats instantly. Supports batch processing, custom chain prefixes, and CSV/JSON export.",
         },
       ],
       link: [

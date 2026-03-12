@@ -1,6 +1,7 @@
 {
   "title": "Bech32 Wallet Address Prefix Converter",
-  "description": "Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different cosmos or EVM based chains using bech32 address prefixes. Process multiple addresses at once with export support.",
+  "subtitle": "See your wallet address on any Cosmos or EVM chain — instantly",
+  "description": "Convert wallet addresses between Cosmos and Ethereum formats instantly. Supports batch processing, custom chain prefixes, and CSV/JSON export.",
   "bech32": {
     "title": "What is a Bech32 Address Prefix?",
     "text": "Bech32 is an address format used by many blockchain networks, especially Cosmos-based chains. The prefix (like 'cosmos', 'osmo', 'juno') identifies which specific blockchain network the address belongs to. For example: 'cosmos1abc...' is a Cosmos Hub address, while 'osmo1abc...' is an Osmosis address. The part after the prefix contains the same underlying account information.",
@@ -19,6 +20,7 @@
     "invalid": "Invalid Address Format",
     "invalid_count": "invalid addresses",
     "hint": "Enter one or multiple addresses (separated by newlines) for instant batch conversion. Connect a wallet to auto-fill.",
+    "usecases_hint": "Useful for cross-chain DeFi, multi-chain wallets, and bridge operations.",
     "buttons": {
       "keplr": "Connect Keplr",
       "evm": "Connect Metamask/EVM Wallet"
@@ -49,7 +51,7 @@
     "custom": "Custom Prefix:"
   },
   "warning": {
-    "title": "Important Note about Cosmos (ATOM) vs EVM (ETH) Address Formats",
+    "title": "Address Format Conversion: Cosmos (ATOM) vs EVM (ETH)",
     "text": {
       "derivation": "Note that the {0} ({1}) of {2} is usually different from Ethereum/ETH (60)!",
       "chains": "Some EVM-compatible Cosmos-SDK based chains (e.g., {0}, Dymension) use 60 as the derivation path. Please be careful when you are converting prefixes based on these chains.",

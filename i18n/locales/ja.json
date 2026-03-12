@@ -1,6 +1,7 @@
 {
   "title": "Bech32 ウォレットアドレスプレフィックスコンバーター",
-  "description": "Cosmos(cosmos1)、Ethereum(0x)のチェックサムアドレス、および異なる Cosmos や EVM ベースのチェーンの bech32 アドレスプレフィックス間で一括変換を実行します。複数のアドレスを一度に処理でき、エクスポート機能に対応しています。",
+  "subtitle": "あなたのウォレットアドレスを Cosmos や EVM チェーンで即座に確認",
+  "description": "Cosmos と Ethereum のウォレットアドレス形式を即座に変換。バッチ処理、カスタムチェーンプレフィックス、CSV/JSON エクスポートに対応。",
   "bech32": {
     "title": "Bech32 アドレスプレフィックスとは？",
     "text": "Bech32 は多くのブロックチェーンネットワーク、特に Cosmos ベースのチェーンで使用されるアドレス形式です。プレフィックス（'cosmos'、'osmo'、'juno' など）は、アドレスがどの特定のブロックチェーンネットワークに属しているかを識別します。例えば：'cosmos1abc...' は Cosmos Hub アドレス、'osmo1abc...' は Osmosis アドレスです。プレフィックス後の部分には、同じ基盤のアカウント情報が含まれています。",
@@ -19,6 +20,7 @@
     "invalid": "無効なアドレス形式",
     "invalid_count": "個の無効なアドレス",
     "hint": "1つまたは複数のアドレス（1行に1つ）を入力して、即座にバッチ変換を実行します。ウォレットを接続して自動入力できます。",
+    "usecases_hint": "クロスチェーン DeFi、マルチチェーンウォレット、ブリッジ操作に便利。",
     "buttons": {
       "keplr": "Keplr を接続",
       "evm": "Metamask/EVM ウォレットを接続"
@@ -29,13 +31,7 @@
     "custom_prefix": "カスタムプレフィックス（オプション）",
     "export_csv": "CSV をエクスポート",
     "export_json": "JSON をエクスポート",
-    "columns": "列を表示"
-  },
-  "converted": {
-    "title": "変換されたアドレス",
-    "cosmos": "Cosmos:",
-    "evm": "EVM/Ethereum:",
-    "custom": "カスタムプレフィックス:",
+    "columns": "列を表示",
     "feature": {
       "title": "バッチ変換とエクスポート",
       "description": "複数のアドレスを一度に効率的に処理します。1行に1つのアドレスを入力すると、サポートされているすべての形式に即座に変換されます。列の切り替えを使用して表示をカスタマイズし、結果を CSV または JSON 形式でエクスポートして、他のツールと統合できます。",
@@ -48,8 +44,14 @@
       ]
     }
   },
+  "converted": {
+    "title": "変換されたアドレス",
+    "cosmos": "Cosmos:",
+    "evm": "EVM/Ethereum:",
+    "custom": "カスタムプレフィックス:"
+  },
   "warning": {
-    "title": "Cosmos (ATOM) と EVM (ETH) の派生パスに関する重要な注意点",
+    "title": "アドレス形式変換について：Cosmos (ATOM) と EVM (ETH)",
     "text": {
       "derivation": "{2} の {0} ({1}) は通常、Ethereum/ETH (60) とは異なることに注意してください！",
       "chains": "一部の EVM 互換の Cosmos-SDK ベースのチェーン（例: {0}, Dymension）は、派生パスとして 60 を使用します。これらのチェーンに基づいてプレフィックスを変換する際は注意してください。",

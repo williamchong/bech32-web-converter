@@ -5,6 +5,7 @@
       <!-- Header -->
       <section class="text-center">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $t('title') }}</h1>
+        <p class="mt-1 text-lg text-gray-500 dark:text-gray-400">{{ $t('subtitle') }}</p>
         <p class="mt-2 text-gray-600 dark:text-gray-300">
           {{ $t('description') }}
         </p>
@@ -23,6 +24,7 @@
             @click.once="onInputAddress"
           />
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">{{ $t('input.hint') }}</p>
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{{ $t('input.usecases_hint') }}</p>
           <div class="mt-4 flex gap-4">
             <UButton v-if="hasKeplr" :label="$t('input.buttons.keplr')" @click="getKeplrCosmosAddress" />
             <UButton v-if="hasEvmWallet" :label="$t('input.buttons.evm')" @click="getEvmAddress" />
