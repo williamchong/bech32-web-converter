@@ -2,7 +2,7 @@
   "name": "bech32-web-converter",
   "type": "module",
   "engines": {
-    "node": ">=20.20.0"
+    "node": ">=24.11.0"
   },
   "scripts": {
     "build": "nuxt build",
@@ -17,7 +17,7 @@
   "dependencies": {
     "@nuxt/icon": "1.14.0",
     "@nuxt/ui": "^3",
-    "@nuxtjs/i18n": "9.5.5",
+    "@nuxtjs/i18n": "^10.4.0",
     "@nuxtjs/sitemap": "7.4.1",
     "@sentry/nuxt": "^9",
     "@vueuse/core": "^13.4.0",
@@ -26,7 +26,7 @@
     "buffer": "^6.0.3",
     "events": "^3.3.0",
     "keccak256": "^1.0.6",
-    "nuxt": "^3.20.2",
+    "nuxt": "^4.0.0",
     "nuxt-gtag": "^3.0.3",
     "vue": "^3.5.25"
   },

@@ -136,18 +136,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(addr, idx) in validAddresses" :key="idx" class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <tr v-for="(row, idx) in batchConversions" :key="idx" class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                     <td v-if="visibleColumns.input" class="py-2 px-2">
-                      <CopyButton :value="addr" :index="idx" field="input" :is-copied="copiedIndex === idx && copiedField === 'input'" @copy="copyToClipboard(addr, idx, 'input')" />
+                      <CopyButton :value="row.input" :index="idx" field="input" :is-copied="copiedIndex === idx && copiedField === 'input'" @copy="copyToClipboard(row.input, idx, 'input')" />
                     </td>
                     <td v-if="visibleColumns.cosmos" class="py-2 px-2">
-                      <CopyButton :value="batchConversions[idx].cosmos" :index="idx" field="cosmos" :is-copied="copiedIndex === idx && copiedField === 'cosmos'" @copy="copyToClipboard(batchConversions[idx].cosmos, idx, 'cosmos')" />
+                      <CopyButton :value="row.cosmos" :index="idx" field="cosmos" :is-copied="copiedIndex === idx && copiedField === 'cosmos'" @copy="copyToClipboard(row.cosmos, idx, 'cosmos')" />
                     </td>
                     <td v-if="visibleColumns.evm" class="py-2 px-2">
-                      <CopyButton :value="batchConversions[idx].evm" :index="idx" field="evm" :is-copied="copiedIndex === idx && copiedField === 'evm'" @copy="copyToClipboard(batchConversions[idx].evm, idx, 'evm')" />
+                      <CopyButton :value="row.evm" :index="idx" field="evm" :is-copied="copiedIndex === idx && copiedField === 'evm'" @copy="copyToClipboard(row.evm, idx, 'evm')" />
                     </td>
                     <td v-if="visibleColumns.custom && newPrefix" class="py-2 px-2">
-                      <CopyButton :value="batchConversions[idx].custom" :index="idx" field="custom" :is-copied="copiedIndex === idx && copiedField === 'custom'" @copy="copyToClipboard(batchConversions[idx].custom, idx, 'custom')" />
+                      <CopyButton :value="row.custom" :index="idx" field="custom" :is-copied="copiedIndex === idx && copiedField === 'custom'" @copy="copyToClipboard(row.custom, idx, 'custom')" />
                     </td>
                   </tr>
                 </tbody>
@@ -343,7 +343,7 @@ const convertAddress = (addr: string) => {
 }
 
 const batchConversions = computed(() => {
-  return validAddresses.value.map(convertAddress)
+  return validAddresses.value.map(addr => ({ input: addr, ...convertAddress(addr) }))
 })
 
 onMounted(() => {
@@ -359,7 +359,7 @@ onMounted(() => {
 
 // For single address mode (backward compatibility)
 const currentAddress = computed(() => {
-  return validAddresses.value.length === 1 ? validAddresses.value[0] : ''
+  return validAddresses.value.length === 1 ? validAddresses.value[0] ?? '' : ''
 })
 
 const isInputEthereum = computed(() => {
@@ -460,12 +460,11 @@ function copyToClipboard(text: string, index?: number, field?: string): void {
 }
 
 function getBatchExportData(): Array<Record<string, string>> {
-  return validAddresses.value.map((addr, idx) => {
-    const conversion = batchConversions.value[idx]
+  return batchConversions.value.map((conversion) => {
     const row: Record<string, string> = {}
 
     if (visibleColumns.value.input) {
-      row.input = addr
+      row.input = conversion.input
     }
     if (visibleColumns.value.cosmos) {
       row.cosmos = conversion.cosmos
@@ -485,7 +484,7 @@ function exportBatchResults(format: 'csv' | 'json'): void {
   if (format === 'csv') {
     const data = getBatchExportData()
     const headers = Object.keys(data[0] || {})
-    const rows = data.map(row => headers.map(header => row[header]))
+    const rows = data.map(row => headers.map(header => row[header] ?? ''))
     const csvContent = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n')
     downloadFile(csvContent, 'batch-conversion.csv', 'text/csv')
   } else {

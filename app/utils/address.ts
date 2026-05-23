@@ -9,9 +9,10 @@ export function convertCosmosToEvm(cosmosAddress: string): string {
   const hash = keccak256(address).toString('hex')
   let checksumAddress = '0x'
   for (let i = 0; i < address.length; i++) {
-    checksumAddress += parseInt(hash[i], 16) >= 8
-      ? address[i].toUpperCase()
-      : address[i]
+    const char = address[i]!
+    checksumAddress += parseInt(hash[i]!, 16) >= 8
+      ? char.toUpperCase()
+      : char
   }
   return checksumAddress
 }

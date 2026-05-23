@@ -18,7 +18,7 @@ Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different 
 
 ## Tech Stack
 
-- [Nuxt 3](https://nuxt.com/) + [Vue 3](https://vuejs.org/)
+- [Nuxt 4](https://nuxt.com/) + [Vue 3](https://vuejs.org/)
 - [Nuxt UI v3](https://ui.nuxt.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/) for testing
@@ -26,7 +26,7 @@ Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different 
 
 ## Prerequisites
 
-- Node.js >= 20.20.0
+- Node.js >= 24.11.0
 - [Yarn](https://classic.yarnpkg.com/) (specified via corepack)
 
 ## Setup

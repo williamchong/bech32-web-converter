@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { bech32 } from 'bech32'
-import { convertCosmosToEvm, convertEvmToCosmos } from '../utils/address'
+import { convertCosmosToEvm, convertEvmToCosmos } from '../app/utils/address'
 
 describe('Address Conversion', () => {
   const testCases = [
