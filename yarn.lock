@@ -973,6 +973,27 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.3.tgz#c2b9d2e374ee62c586d3adbea87199b1d7a7a6ba"
   integrity sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==
 
+"@iconify-json/heroicons@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@iconify-json/heroicons/-/heroicons-1.2.3.tgz#041fe0d689535dddc51e97c8b692cdff792ac4b2"
+  integrity sha512-n+vmCEgTesRsOpp5AB5ILB6srsgsYK+bieoQBNlafvoEhjVXLq8nIGN4B0v/s4DUfa0dOrjwE/cKJgIKdJXOEg==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/lucide@^1.2.109":
+  version "1.2.109"
+  resolved "https://registry.yarnpkg.com/@iconify-json/lucide/-/lucide-1.2.109.tgz#c770ec895df5c9bd13e2b4e88b80ccb9a57d7b5b"
+  integrity sha512-O5arvTVcu95soP3dGWJp/Nl5L5FYmFu2z75sSrQmGzrgrnsCU49t8+ZB7HPq//GRNXpWUoNfDRcs5yR7XMa+zw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/ph@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/ph/-/ph-1.2.2.tgz#eac734e80f4639df6ade990690a825540b4259c4"
+  integrity sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify/collections@^1.0.560", "@iconify/collections@^1.0.563":
   version "1.0.646"
   resolved "https://registry.yarnpkg.com/@iconify/collections/-/collections-1.0.646.tgz#c5b4497efccbfdd84e860b8d07038dbd5c56a717"

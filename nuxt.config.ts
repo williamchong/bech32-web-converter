@@ -43,6 +43,15 @@ export default defineNuxtConfig({
     id: "G-J481P5HG5T",
   },
 
+  icon: {
+    // Static GitHub Pages host has no server, so the runtime
+    // `/api/_nuxt_icon/` endpoint 404s. Bundle scanned icons into the
+    // client instead so they resolve offline without API fallback.
+    clientBundle: {
+      scan: true,
+    },
+  },
+
   plugins: ["~/plugins/node.client.ts"],
 
   i18n: {
