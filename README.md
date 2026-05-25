@@ -19,7 +19,7 @@ Batch convert between Cosmos(cosmos1), Ethereum(0x) with checksum and different 
 ## Tech Stack
 
 - [Nuxt 4](https://nuxt.com/) + [Vue 3](https://vuejs.org/)
-- [Nuxt UI v3](https://ui.nuxt.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
+- [Nuxt UI v4](https://ui.nuxt.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/) for testing
 - Deployed on [GitHub Pages](https://pages.github.com/)

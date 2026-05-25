@@ -31,7 +31,7 @@ These depend on `bech32` and `keccak256` npm packages, which require Node.js `Bu
 
 ### UI framework
 
-Uses **Nuxt UI v3** with **Tailwind CSS v4**. Theme colors are configured in `app/app.config.ts` (primary: indigo, neutral: gray). Components use Nuxt UI primitives (`UCard`, `UTextarea`, `UButton`, `UBadge`, etc.).
+Uses **Nuxt UI v4** with **Tailwind CSS v4**. Theme colors are configured in `app/app.config.ts` (primary: indigo, neutral: gray). Components use Nuxt UI primitives (`UCard`, `UTextarea`, `UButton`, `UBadge`, etc.).
 
 ### Composables
 
